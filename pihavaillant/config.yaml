@@ -1,0 +1,41 @@
+name: PiHA Vaillant
+version: "0.1.0"
+slug: pihavaillant
+description: "Monitor kotła Vaillant ecoTEC plus przez ebusd — tylko odczyt"
+url: https://github.com/plewand86/pihavaillant
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+ingress: true
+ingress_port: 8090
+panel_icon: mdi:boiler
+panel_title: Vaillant
+services:
+  - mqtt:need
+options:
+  ebusd_host: ""
+  ebusd_port: 8888
+  circuit: bai
+  poll_interval: 30
+  timeout: 5
+  device_id: boiler
+  mqtt_host: ""
+  mqtt_port: 1883
+  mqtt_username: ""
+  mqtt_password: ""
+  mqtt_tls: false
+schema:
+  ebusd_host: str
+  ebusd_port: port
+  circuit: match(^[A-Za-z0-9_]+$)
+  poll_interval: int(15,300)
+  timeout: int(1,15)
+  device_id: match(^[a-z0-9_]+$)
+  mqtt_host: str
+  mqtt_port: port
+  mqtt_username: str
+  mqtt_password: password
+  mqtt_tls: bool

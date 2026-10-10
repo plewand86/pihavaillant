@@ -1,0 +1,13 @@
+{
+  "ebusd_host": "192.168.1.20",
+  "ebusd_port": 8888,
+  "circuit": "bai",
+  "poll_interval": 30,
+  "timeout": 5,
+  "device_id": "boiler",
+  "mqtt_host": "192.168.1.10",
+  "mqtt_port": 1883,
+  "mqtt_username": "pihavaillant",
+  "mqtt_password": "REPLACE_ME",
+  "mqtt_tls": false
+}

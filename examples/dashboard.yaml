@@ -1,0 +1,56 @@
+title: Vaillant
+views:
+  - title: Kocioł
+    path: vaillant
+    icon: mdi:boiler
+    cards:
+      - type: glance
+        title: Praca kotła
+        entities:
+          - entity: binary_sensor.pihavaillant_boiler_flame
+            name: Płomień
+          - entity: sensor.pihavaillant_boiler_pump_state
+            name: Pompa
+          - entity: binary_sensor.pihavaillant_boiler_hwc_demand
+            name: CWU
+          - entity: binary_sensor.pihavaillant_boiler_lockout
+            name: Blokada
+      - type: gauge
+        entity: sensor.pihavaillant_boiler_modulation
+        name: Modulacja zadana
+        min: 0
+        max: 100
+      - type: entities
+        title: Temperatury i hydraulika
+        entities:
+          - sensor.pihavaillant_boiler_flow_temp
+          - sensor.pihavaillant_boiler_return_temp
+          - sensor.pihavaillant_boiler_delta_temp
+          - sensor.pihavaillant_boiler_storage_temp
+          - sensor.pihavaillant_boiler_outdoor_temp
+          - sensor.pihavaillant_boiler_pressure
+          - sensor.pihavaillant_boiler_fan_speed
+          - sensor.pihavaillant_boiler_pump_power
+      - type: history-graph
+        title: Temperatury — ostatnie 12 godzin
+        hours_to_show: 12
+        entities:
+          - sensor.pihavaillant_boiler_flow_temp
+          - sensor.pihavaillant_boiler_return_temp
+          - sensor.pihavaillant_boiler_storage_temp
+      - type: history-graph
+        title: Cykle palnika
+        hours_to_show: 6
+        entities:
+          - binary_sensor.pihavaillant_boiler_flame
+          - sensor.pihavaillant_boiler_modulation
+      - type: entities
+        title: Liczniki i diagnostyka
+        entities:
+          - sensor.pihavaillant_boiler_hc_hours
+          - sensor.pihavaillant_boiler_hwc_hours
+          - sensor.pihavaillant_boiler_hc_starts
+          - sensor.pihavaillant_boiler_hwc_starts
+          - sensor.pihavaillant_boiler_current_error
+          - sensor.pihavaillant_boiler_invalid_count
+          - sensor.pihavaillant_boiler_last_poll

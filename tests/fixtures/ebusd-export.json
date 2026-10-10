@@ -1,0 +1,2496 @@
+{
+  "timestamp": "2026-10-10T08:11:59.354686+02:00",
+  "force": true,
+  "total": 167,
+  "successful": 123,
+  "messages": [
+    {
+      "circuit": "bai",
+      "name": "ACRoomthermostat",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ACRoomthermostat value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "AccessoriesOne",
+      "status": "ok",
+      "error": null,
+      "raw": "bai AccessoriesOne value=0 [Funktion des Zubehörrelais 1]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": "Funktion des Zubehörrelais 1",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "AccessoriesTwo",
+      "status": "ok",
+      "error": null,
+      "raw": "bai AccessoriesTwo value=externalerrormessage [Funktion des Zubehörrelais 2]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "externalerrormessage",
+          "unit": null,
+          "description": "Funktion des Zubehörrelais 2",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "AverageIgnitiontime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai AverageIgnitiontime value=2.3 s [Mittlere Zündzeit]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "2.3 s",
+          "unit": null,
+          "description": "Mittlere Zündzeit",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "BlockTimeHcMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai BlockTimeHcMax value=1 min [Minuten]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "1 min",
+          "unit": null,
+          "description": "Minuten",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "BoilerType",
+      "status": "ok",
+      "error": null,
+      "raw": "bai BoilerType value=2",
+      "fields": [
+        {
+          "field": "value",
+          "value": 2.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ChangesDSN",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ChangesDSN value=0",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "CirPump",
+      "status": "ok",
+      "error": null,
+      "raw": "bai CirPump value=on",
+      "fields": [
+        {
+          "field": "value",
+          "value": "on",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "CounterStartAttempts3",
+      "status": "ok",
+      "error": null,
+      "raw": "bai CounterStartAttempts3 value=1 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "CounterStartAttempts4",
+      "status": "ok",
+      "error": null,
+      "raw": "bai CounterStartAttempts4 value=1 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "CounterStartattempts1",
+      "status": "ok",
+      "error": null,
+      "raw": "bai CounterStartattempts1 value=3 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 3.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "CounterStartattempts2",
+      "status": "ok",
+      "error": null,
+      "raw": "bai CounterStartattempts2 value=3 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 3.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Currenterror",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Currenterror error=- [Fehlernummer];error_1=- [Fehlernummer];error_2=- [Fehlernummer];error_3=- [Fehlernummer];error_4=- [Fehlernummer]",
+      "fields": [
+        {
+          "field": "error",
+          "value": null,
+          "unit": null,
+          "description": "Fehlernummer",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "error_1",
+          "value": null,
+          "unit": null,
+          "description": "Fehlernummer",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "error_2",
+          "value": null,
+          "unit": null,
+          "description": "Fehlernummer",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "error_3",
+          "value": null,
+          "unit": null,
+          "description": "Fehlernummer",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "error_4",
+          "value": null,
+          "unit": null,
+          "description": "Fehlernummer",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DCFTimeDate",
+      "status": "error",
+      "error": "ERR: argument value out of valid range in decode: bai DCFTimeDate btime=08:08:39 [Uhrzeit];bdate=",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "DCRoomthermostat",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DCRoomthermostat value=on",
+      "fields": [
+        {
+          "field": "value",
+          "value": "on",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DSN",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DSN value=31067",
+      "fields": [
+        {
+          "field": "value",
+          "value": 31067.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DSNOffset",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DSNOffset value=240",
+      "fields": [
+        {
+          "field": "value",
+          "value": 240.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DSNStart",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DSNStart value=1440",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1440.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DateTime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DateTime dcfstate=nosignal [DCF Empfängerstatus];btime=-:-:- [Uhrzeit];bdate=-.-.- [Datum];temp=15.125 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "dcfstate",
+          "value": "nosignal",
+          "unit": null,
+          "description": "DCF Empfängerstatus",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "btime",
+          "value": "-:-:-",
+          "unit": null,
+          "description": "Uhrzeit",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "bdate",
+          "value": "-.-.-",
+          "unit": null,
+          "description": "Datum",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp",
+          "value": 15.125,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DcfState",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DcfState value=ok [DCF Empfängerstatus]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "ok",
+          "unit": null,
+          "description": "DCF Empfängerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DeactivationsIFC",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DeactivationsIFC value=1",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DeactivationsTemplimiter",
+      "status": "ok",
+      "error": null,
+      "raw": "bai DeactivationsTemplimiter value=0",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "DeltaFlowReturnMax",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai DeltaFlowReturnMax",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "DisplayMode",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai DisplayMode",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "EBusHeatcontrol",
+      "status": "ok",
+      "error": null,
+      "raw": "bai EBusHeatcontrol value=69",
+      "fields": [
+        {
+          "field": "value",
+          "value": 69.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "EbusSourceOn",
+      "status": "ok",
+      "error": null,
+      "raw": "bai EbusSourceOn value=on",
+      "fields": [
+        {
+          "field": "value",
+          "value": "on",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "EbusVoltage",
+      "status": "ok",
+      "error": null,
+      "raw": "bai EbusVoltage value=on",
+      "fields": [
+        {
+          "field": "value",
+          "value": "on",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Errorhistory",
+      "status": "error",
+      "error": "ERR: end of input reached",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "Expertlevel_ReturnTemp",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Expertlevel_ReturnTemp temp=-1.81 °C [Temperatur];sensor=cutoff [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": -1.81,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "sensor",
+          "value": "cutoff",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ExtFlowTempDesiredMin",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai ExtFlowTempDesiredMin",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "ExtStorageModulCon",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ExtStorageModulCon value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ExtWP",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ExtWP value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ExternGasvalve",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ExternGasvalve value=240",
+      "fields": [
+        {
+          "field": "value",
+          "value": 240.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ExternalFaultmessage",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ExternalFaultmessage value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ExternalFlowTempDesired",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai ExternalFlowTempDesired",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "ExternalHwcSwitch",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ExternalHwcSwitch value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FanHours",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FanHours value=6503 h [Stunden]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 6503.0,
+          "unit": "h",
+          "description": "Stunden",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FanMaxSpeedOperation",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FanMaxSpeedOperation value=10700 rpm [Lüfter Maximaldrehzahl]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 10700.0,
+          "unit": "rpm",
+          "description": "Lüfter Maximaldrehzahl",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FanMinSpeedOperation",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FanMinSpeedOperation value=2130 rpm [Lüfter Minimaldrehzahl]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 2130.0,
+          "unit": "rpm",
+          "description": "Lüfter Minimaldrehzahl",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FanPWMSum",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai FanPWMSum",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "FanPWMTest",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai FanPWMTest",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "FanSpeed",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FanSpeed value=0 rpm [Aktuelle Lüfterdrehzahl]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "rpm",
+          "description": "Aktuelle Lüfterdrehzahl",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FanSpeedOffsetMax",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai FanSpeedOffsetMax",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "FanSpeedOffsetMin",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai FanSpeedOffsetMin",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "FanStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FanStarts value=11579 [Anzahl Starts]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 11579.0,
+          "unit": null,
+          "description": "Anzahl Starts",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Flame",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Flame value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FlameSensingASIC",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FlameSensingASIC value=944",
+      "fields": [
+        {
+          "field": "value",
+          "value": 944.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FloorHeatingContact",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FloorHeatingContact value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FlowSetPotmeter",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai FlowSetPotmeter",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "FlowTemp",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FlowTemp temp=45.69 °C [Temperatur];sensor=ok [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": 45.69,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "sensor",
+          "value": "ok",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FlowTempDesired",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FlowTempDesired value=0.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FlowTempMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FlowTempMax value=83.94 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 83.94,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FlowsetHcMax",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai FlowsetHcMax",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "FlowsetHwcMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FlowsetHwcMax value=59.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 59.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Fluegasvalve",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Fluegasvalve value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "FluegasvalveOpen",
+      "status": "ok",
+      "error": null,
+      "raw": "bai FluegasvalveOpen value=on",
+      "fields": [
+        {
+          "field": "value",
+          "value": "on",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Gasvalve",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Gasvalve value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Gasvalve3UC",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Gasvalve3UC value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "GasvalveASICFeedback",
+      "status": "ok",
+      "error": null,
+      "raw": "bai GasvalveASICFeedback value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "GasvalveUC",
+      "status": "ok",
+      "error": null,
+      "raw": "bai GasvalveUC value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "GasvalveUCFeedback",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai GasvalveUCFeedback",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "HcHours",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HcHours value=4787 h [Stunden]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 4787.0,
+          "unit": "h",
+          "description": "Stunden",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HcPumpMode",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HcPumpMode value=post_run [Pumpenbetriebsart für den Heizbetrieb]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "post_run",
+          "unit": null,
+          "description": "Pumpenbetriebsart für den Heizbetrieb",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HcPumpStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HcPumpStarts value=11315 [Anzahl Starts]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 11315.0,
+          "unit": null,
+          "description": "Anzahl Starts",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HcStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HcStarts value=1800 [Schaltspiele Heizbetrieb]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1800.0,
+          "unit": null,
+          "description": "Schaltspiele Heizbetrieb",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HcUnderHundredStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HcUnderHundredStarts value=63",
+      "fields": [
+        {
+          "field": "value",
+          "value": 63.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HeatingSwitch",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HeatingSwitch value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HoursTillService",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HoursTillService value=2 h [Stunden]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 2.0,
+          "unit": "h",
+          "description": "Stunden",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcDemand",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcDemand value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcHours",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcHours value=1653 h [Stunden]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1653.0,
+          "unit": "h",
+          "description": "Stunden",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcImpellorSwitch",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcImpellorSwitch value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcPostrunTime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcPostrunTime value=- s [Pumpennachlaufzeit nach Speicherladung]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "- s",
+          "unit": null,
+          "description": "Pumpennachlaufzeit nach Speicherladung",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcSetPotmeter",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcSetPotmeter value=349.62 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 349.62,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcStarts value=6600 [Schaltspiele WW Betrieb]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 6600.0,
+          "unit": null,
+          "description": "Schaltspiele WW Betrieb",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcSwitch",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcSwitch value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcTemp",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcTemp temp=116.06 °C [Temperatur];sensor=circuit [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": 116.06,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "sensor",
+          "value": "circuit",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcTempDesired",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcTempDesired value=0.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcTempMax",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai HwcTempMax",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcTypes",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcTypes value=32",
+      "fields": [
+        {
+          "field": "value",
+          "value": 32.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcUnderHundredStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcUnderHundredStarts value=26",
+      "fields": [
+        {
+          "field": "value",
+          "value": 26.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcWaterflow",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcWaterflow value=0.00",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "HwcWaterflowMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai HwcWaterflowMax value=0.00",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Ignitor",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Ignitor value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "InitialisationEEPROM",
+      "status": "ok",
+      "error": null,
+      "raw": "bai InitialisationEEPROM value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "IonisationVoltageLevel",
+      "status": "ok",
+      "error": null,
+      "raw": "bai IonisationVoltageLevel value=0.0 [Ionisationsspannung: größer 80 = keine Flammekleiner 40 = gutes Flammensignal]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": "Ionisationsspannung: größer 80 = keine Flammekleiner 40 = gutes Flammensignal",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Maintenancedata_HwcTempMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Maintenancedata_HwcTempMax value=116.06 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 116.06,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "MaxIgnitiontime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai MaxIgnitiontime value=4.8 s [Maximale Zündzeit]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "4.8 s",
+          "unit": null,
+          "description": "Maximale Zündzeit",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "MinIgnitiontime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai MinIgnitiontime value=2.0 s [Minimale Zündzeit]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "2.0 s",
+          "unit": null,
+          "description": "Minimale Zündzeit",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ModulationDesired",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ModulationDesired value=0.0 % [Modulationssollwert]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "%",
+          "description": "Modulationssollwert",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "OutdoorstempSensor",
+      "status": "ok",
+      "error": null,
+      "raw": "bai OutdoorstempSensor temp=15.12 °C [Temperatur];sensor=ok [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": 15.12,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "sensor",
+          "value": "ok",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "OverflowCounter",
+      "status": "ok",
+      "error": null,
+      "raw": "bai OverflowCounter value=yes",
+      "fields": [
+        {
+          "field": "value",
+          "value": "yes",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ParamToken",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ParamToken value=2",
+      "fields": [
+        {
+          "field": "value",
+          "value": 2.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PartloadHcKW",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PartloadHcKW value=0 kW",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "kW",
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PartloadHwcKW",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PartloadHwcKW value=0 kW",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "kW",
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PartnumberBox",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PartnumberBox value=00 20 24 35 55 [part number of the eBox]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "00 20 24 35 55",
+          "unit": null,
+          "description": "part number of the eBox",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PositionValveSet",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PositionValveSet value=100",
+      "fields": [
+        {
+          "field": "value",
+          "value": 100.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PowerValue",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PowerValue",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrAPSCounter",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrAPSCounter",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrAPSSum",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrAPSSum",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergyCountHc1",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergyCountHc1",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergyCountHc2",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergyCountHc2",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergyCountHc3",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergyCountHc3",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergyCountHwc1",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergyCountHwc1",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergyCountHwc2",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergyCountHwc2",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergyCountHwc3",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergyCountHwc3",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergySumHc1",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergySumHc1",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergySumHc2",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergySumHc2",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergySumHc3",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergySumHc3",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergySumHwc1",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergySumHwc1",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergySumHwc2",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergySumHwc2",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrEnergySumHwc3",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrEnergySumHwc3",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrVortexFlowSensorValue",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PrVortexFlowSensorValue",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PrimaryCircuitFlowrate",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PrimaryCircuitFlowrate value=0.00 l/min",
+      "fields": [
+        {
+          "field": "value",
+          "value": "0.00 l/min",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ProductionByte",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai ProductionByte",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PumpHours",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PumpHours value=7159 h [Stunden]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 7159.0,
+          "unit": "h",
+          "description": "Stunden",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PumpHwcFlowNumber",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PumpHwcFlowNumber",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PumpHwcFlowSum",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PumpHwcFlowSum",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "PumpPower",
+      "status": "ok",
+      "error": null,
+      "raw": "bai PumpPower value=0",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "PumpPowerDesired",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai PumpPowerDesired",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "RemainingBoilerblocktime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai RemainingBoilerblocktime value=0 min [Minuten]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "0 min",
+          "unit": null,
+          "description": "Minuten",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ReturnRegulation",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai ReturnRegulation",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "ReturnTemp",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ReturnTemp temp=42.12 °C [Temperatur];tempmirror=64861 °C;sensor=ok [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": 42.12,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "tempmirror",
+          "value": 64861.0,
+          "unit": "°C",
+          "description": null,
+          "valid_for_metrics": false
+        },
+        {
+          "field": "sensor",
+          "value": "ok",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ReturnTempMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ReturnTempMax value=72.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 72.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "SHEMaxDeltaHwcFlow",
+      "status": "ok",
+      "error": null,
+      "raw": "bai SHEMaxDeltaHwcFlow value=0.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "SHEMaxFlowTemp",
+      "status": "ok",
+      "error": null,
+      "raw": "bai SHEMaxFlowTemp value=0.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "SecondPumpMode",
+      "status": "ok",
+      "error": null,
+      "raw": "bai SecondPumpMode value=0",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "SerialNumber",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai SerialNumber",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "SetFactoryValues",
+      "status": "ok",
+      "error": null,
+      "raw": "bai SetFactoryValues value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "SolPostHeat",
+      "status": "ok",
+      "error": null,
+      "raw": "bai SolPostHeat value=0",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Statenumber",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai Statenumber",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "Status",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai Status",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "Status01",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Status01 temp=45.5 °C [Temperatur];temp_1=42.0 °C [Temperatur];temp_2=15.125 °C [Temperatur];temp_3=- °C [Temperatur];temp_4=37.0 °C [Temperatur];pumpstate=off [Pumpenstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": 45.5,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_1",
+          "value": 42.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_2",
+          "value": 15.125,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_3",
+          "value": null,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_4",
+          "value": 37.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "pumpstate",
+          "value": "off",
+          "unit": null,
+          "description": "Pumpenstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Status02",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Status02 hwcmode=auto [Warmwasser Modus];temp=60 °C [Temperatur];temp_1=50.0 °C [Temperatur];temp_2=70 °C [Temperatur];temp_3=70.0 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "hwcmode",
+          "value": "auto",
+          "unit": null,
+          "description": "Warmwasser Modus",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp",
+          "value": 60.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_1",
+          "value": 50.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_2",
+          "value": 70.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "temp_3",
+          "value": 70.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Status16",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai Status16",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "StorageLoadPumpHours",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StorageLoadPumpHours value=2024 h [Stunden]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 2024.0,
+          "unit": "h",
+          "description": "Stunden",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "StorageLoadTimeMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StorageLoadTimeMax value=- min [Minuten]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "- min",
+          "unit": null,
+          "description": "Minuten",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "StorageTemp",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StorageTemp temp=37.31 °C [Temperatur];sensor=ok [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "temp",
+          "value": 37.31,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "sensor",
+          "value": "ok",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "StorageTempDesired",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StorageTempDesired value=40.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 40.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "StorageTempMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StorageTempMax value=45.19 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 45.19,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "StorageloadPumpStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StorageloadPumpStarts value=8455 [Anzahl Starts]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 8455.0,
+          "unit": null,
+          "description": "Anzahl Starts",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Storageloadpump",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Storageloadpump value=0 %",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "%",
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "StoragereleaseClock",
+      "status": "ok",
+      "error": null,
+      "raw": "bai StoragereleaseClock value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TargetFanSpeed",
+      "status": "ok",
+      "error": null,
+      "raw": "bai TargetFanSpeed value=0 rpm [Drehzahlsollwert des Lüfters]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "rpm",
+          "description": "Drehzahlsollwert des Lüfters",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TargetFanSpeedOutput",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai TargetFanSpeedOutput",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "TempDiffBlock",
+      "status": "ok",
+      "error": null,
+      "raw": "bai TempDiffBlock value=0 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TempDiffFailure",
+      "status": "ok",
+      "error": null,
+      "raw": "bai TempDiffFailure value=0 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TempGradientFailure",
+      "status": "ok",
+      "error": null,
+      "raw": "bai TempGradientFailure value=0 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 0.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TempMaxDiffExtTFT",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai TempMaxDiffExtTFT",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "Templimiter",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Templimiter value=on",
+      "fields": [
+        {
+          "field": "value",
+          "value": "on",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TemplimiterWithNTC",
+      "status": "ok",
+      "error": null,
+      "raw": "bai TemplimiterWithNTC value=yes",
+      "fields": [
+        {
+          "field": "value",
+          "value": "yes",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "Testbyte",
+      "status": "ok",
+      "error": null,
+      "raw": "bai Testbyte value=3",
+      "fields": [
+        {
+          "field": "value",
+          "value": 3.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "TimerInputHc",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai TimerInputHc",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "ValveMode",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ValveMode value=160",
+      "fields": [
+        {
+          "field": "value",
+          "value": 160.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "ValveStarts",
+      "status": "ok",
+      "error": null,
+      "raw": "bai ValveStarts value=4691 [Anzahl Starts]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 4691.0,
+          "unit": null,
+          "description": "Anzahl Starts",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "VolatileLockout",
+      "status": "ok",
+      "error": null,
+      "raw": "bai VolatileLockout value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "VolatileLockoutIFCGV",
+      "status": "ok",
+      "error": null,
+      "raw": "bai VolatileLockoutIFCGV value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "VortexFlowSensor",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai VortexFlowSensor",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "WP",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WP value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WPPostrunTime",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WPPostrunTime value=1 min [Minuten]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "1 min",
+          "unit": null,
+          "description": "Minuten",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WPSecondStage",
+      "status": "error",
+      "error": "ERR: invalid position in decode: bai WPSecondStage",
+      "raw": null,
+      "fields": []
+    },
+    {
+      "circuit": "bai",
+      "name": "WarmstartDemand",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WarmstartDemand value=no",
+      "fields": [
+        {
+          "field": "value",
+          "value": "no",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WarmstartOffset",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WarmstartOffset value=21.00 °C [Temperatur]",
+      "fields": [
+        {
+          "field": "value",
+          "value": 21.0,
+          "unit": "°C",
+          "description": "Temperatur",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WaterHcFlowMax",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WaterHcFlowMax value=1507",
+      "fields": [
+        {
+          "field": "value",
+          "value": 1507.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WaterPressure",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WaterPressure press=1.532 bar [Druck];sensor=ok [Fühlerstatus]",
+      "fields": [
+        {
+          "field": "press",
+          "value": 1.532,
+          "unit": "bar",
+          "description": "Druck",
+          "valid_for_metrics": true
+        },
+        {
+          "field": "sensor",
+          "value": "ok",
+          "unit": null,
+          "description": "Fühlerstatus",
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WaterpressureBranchControlOff",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WaterpressureBranchControlOff value=off",
+      "fields": [
+        {
+          "field": "value",
+          "value": "off",
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WaterpressureMeasureCounter",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WaterpressureMeasureCounter value=230",
+      "fields": [
+        {
+          "field": "value",
+          "value": 230.0,
+          "unit": null,
+          "description": null,
+          "valid_for_metrics": true
+        }
+      ]
+    },
+    {
+      "circuit": "bai",
+      "name": "WaterpressureVariantSum",
+      "status": "ok",
+      "error": null,
+      "raw": "bai WaterpressureVariantSum value=65529 mbar [Druck]",
+      "fields": [
+        {
+          "field": "value",
+          "value": "65529 mbar",
+          "unit": null,
+          "description": "Druck",
+          "valid_for_metrics": true
+        }
+      ]
+    }
+  ]
+}
