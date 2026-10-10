@@ -1,8 +1,14 @@
 # PiHA Vaillant
 
+**Wersja 0.2.0:** schemat kotłowni i trwała historia palnika.
+W HA odśwież repozytoria w sklepie dodatków, otwórz PiHA Vaillant i wybierz
+**Aktualizuj**. Zachowano slug i identyfikatory encji; nie trzeba dodawać
+integracji ponownie. Nowa historia zaczyna być zbierana po aktualizacji.
+
 Dodatek Home Assistant do wizualizacji Vaillant ecoTEC plus przez działający **ebusd**.
 Odczytuje dane z portu TCP ebusd i tworzy 32 encje MQTT Discovery. Zawiera polski
-panel Ingress, wykres temperatur, diagnostykę oraz dashboard Lovelace bez dodatkowych kart HACS.
+panel Ingress ze schematem kotła, pomp i zasobnika, trwałą historię palnika,
+wykres temperatur, diagnostykę oraz dashboard Lovelace bez dodatkowych kart HACS.
 
 **Wyłącznie odczyt:** nie ma usług sterowania, tematów MQTT command, zmiany nastaw,
 resetowania błędów ani poleceń write/hex. Aktywne zapytania `read` wysyłają żądania
@@ -16,8 +22,10 @@ Zachowano układ repozytorium dodatków (`repository.json`, katalog aplikacji,
 parametrów MQTT z Supervisora. Kod napisano osobno; nie skopiowano funkcji LPR,
 wywoływania usług HA, danych kamer ani historii Git.
 
-Panel jest lekkim HTML/CSS/JS, bez procesu budowania React/Vite. Trwałą historię
-zapewnia HA Recorder; panel ma bufor 720 próbek w pamięci, tracony po restarcie.
+Panel jest lekkim HTML/CSS/JS, bez procesu budowania React/Vite. Od wersji 0.2.0
+historia palnika i temperatur jest zapisywana w SQLite w `/data/<device_id>.sqlite3`
+z retencją 90 dni; przetrwa restart i aktualizację dodatku. HA Recorder niezależnie
+zapisuje historię encji MQTT.
 To **dodatek + integracja MQTT**, nie `custom_components` ani integracja HACS.
 
 ```
@@ -97,6 +105,9 @@ Diagnostyka: bieżące kody błędów, liczba niedostępnych odczytów i czas za
 - `PowerValue` i `PrEnergySum*` nie są publikowane: próbka zawiera błędy dekodowania.
   Nie wyliczamy energii, gazu ani mocy cieplnej z obrotów/modulacji.
 - `PumpPower` nie ma potwierdzonej jednostki w eksporcie, dlatego pozostaje bez jednostki.
+- Płomień jest odczytywany aktywnie (bez cache, `-m 0`) co około 5 sekund,
+  między zapytaniami innych parametrów. Odczyty są sekwencyjne; timeout innego
+  parametru może opóźnić kolejny odczyt płomienia. Nie wysyłamy równoległych zapytań.
 - Liczniki i minimalne obroty są pobierane co 5 minut. Pozostałe odczyty co cykl,
   z przerwą 150 ms między zapytaniami. ebusd może zwrócić cache młodszy niż cykl
   (liczniki: 300 s). Błędy dekodowania są ponawiane po 5 minutach, timeouty co cykl.
@@ -108,6 +119,21 @@ Diagnostyka: bieżące kody błędów, liczba niedostępnych odczytów i czas za
   na następny cykl. Pomyślne wcześniejsze odczyty liczników mogą mieć do 5 min wieku.
 
 ## Dashboard
+
+Panel Ingress zawiera schemat kotła, pompy obiegowej, ogrzewania i zasobnika.
+Płomień i animacja pompy wynikają z odczytów, a przy braku danych są wygaszane.
+Schemat jest poglądowy — nie dokumentuje rzeczywistego przebiegu rur ani
+nie potwierdza jednoczesnego przepływu przez oba obiegi.
+
+**Historia palnika:** wybierz 6 h, 24 h, 7 dni lub własny przedział dat.
+Pomarańczowe odcinki oznaczają pracę, niebieskie wyłączenie, kreskowane brak danych.
+Kliknięcie odcinka pokazuje godziny i czas pracy. Tabela poniżej rozróżnia pełne
+cykle, odcinki niepełne i pracę w toku. Podsumowanie pokazuje czas pracy w zakresie,
+liczbę wykrytych zapłonów, pokrycie odczytami i czas bez danych.
+
+Są to **czasy wykrycia z dokładnością ograniczoną częstotliwością odczytów**,
+nie dokładne znaczniki zdarzeń z elektroniki kotła. Historia nie odtwarza się wstecz
+z liczników HcHours/HwcHours. Szczegóły obliczeń: [docs/HISTORY.md](docs/HISTORY.md).
 
 W HA utwórz pusty dashboard, przejdź do edytora surowej konfiguracji i wklej
 `examples/dashboard.yaml`. Karty używają standardowych komponentów HA.
@@ -143,7 +169,10 @@ python -m uvicorn backend.main:app --host 127.0.0.1 --port 8090 --no-proxy-heade
 
 Otwórz http://127.0.0.1:8090. Bez Supervisora panel akceptuje tylko localhost;
 w HA tylko rzeczywisty adres proxy Ingress. Nagłówki proxy nie mogą podmienić IP.
-Panel udostępnia wyłącznie GET `/`, `/api/state`, `/api/history`, bez sekretów.
+Panel udostępnia wyłącznie odczytowe endpointy i zasoby, bez sekretów.
+`/api/history` i `/api/burner` przyjmują `start`/`end` jako sekundy Unix UTC,
+maksymalnie 7 dni na zapytanie. Lokalny katalog danych można zmienić zmienną
+`PIH_DATA_DIR` (domyślnie `./data` bez Supervisora).
 Dodatek nie wystawia portu na hoście i nie potrzebuje uprawnień do usług HA.
 
 ## Rozwiązywanie problemów

@@ -126,7 +126,8 @@ class PollTests(unittest.IsolatedAsyncioTestCase):
         raw = {item["name"]: item["raw"] for item in fixture["messages"]}
         async def read(message, age):
             return parse_verbose(raw[message])
-        monitor = Monitor(load_options())
+        monitor = Monitor({**load_options(), "history_path": ":memory:"})
+        self.addCleanup(monitor.history.close)
         monitor.client.read = AsyncMock(side_effect=read)
         with patch("backend.main.asyncio.sleep", new_callable=AsyncMock):
             await monitor.poll()
@@ -143,6 +144,14 @@ class PollTests(unittest.IsolatedAsyncioTestCase):
 
 
 class ApiTests(unittest.TestCase):
+    def setUp(self):
+        import tempfile
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        context = patch.dict("os.environ", {"PIH_DATA_DIR": self.temp.name})
+        context.start()
+        self.addCleanup(context.stop)
+
     def test_routes_are_read_only_and_do_not_expose_secrets(self):
         from fastapi.testclient import TestClient
         from backend.main import app, Monitor, load_options
@@ -154,6 +163,12 @@ class ApiTests(unittest.TestCase):
             self.assertNotIn("mqtt_password", response.text)
             self.assertEqual(client.post("/api/state").status_code, 405)
             self.assertEqual(client.get("/api/history").json(), [])
+            self.assertEqual(client.get("/api/burner").json()["on_seconds"], 0)
+            self.assertEqual(client.get("/api/burner?start=100&end=99").status_code, 400)
+            self.assertEqual(client.get("/api/burner?start=0&end=9999999").status_code, 400)
+            self.assertEqual(client.get("/api/burner?start=nan").status_code, 422)
+            self.assertEqual(client.get("/style.css").status_code, 200)
+            self.assertEqual(client.get("/app.js").status_code, 200)
         with patch.object(Monitor, "run", new_callable=AsyncMock), patch.dict("os.environ", {"SUPERVISOR_TOKEN": "test"}), TestClient(app) as client:
             self.assertEqual(client.get("/").status_code, 403)
 

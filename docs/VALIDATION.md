@@ -1,8 +1,11 @@
-# Weryfikacja wydania 0.1.0 — 2026-10-10
+# Weryfikacja wydania 0.2.0 — 2026-10-10
 
 ## Wykonane lokalnie
 
-- 11 testów unittest: wszystkie zakończone poprawnie na Pythonie 3.12.14.
+- 20 testów unittest: wszystkie zakończone poprawnie na Pythonie 3.12.14.
+- Testy historii obejmują pełny cykl, timeout, długą przerwę, restart podczas
+  pracy, przycinanie do zakresu, brak dopisywania czasu po ostatniej próbce,
+  cofnięcie zegara, retencję i ograniczenie liczby próbek temperatur.
 - Parser sprawdzony na rzeczywistym załączniku (167 wiadomości, 123 poprawne,
   44 błędy). Porównano wynik importu JSON z parsowaniem surowych odpowiedzi ebusd.
 - Sprawdzono błędny czujnik, wartości spoza zakresu, niezgodne jednostki, braki,
@@ -16,10 +19,11 @@
   Publikację sprawdzano za pomocą obiektu testowego, bez rzeczywistego brokera.
 - Testy HTTP: odczyt panelu i API, odrzucenie POST oraz połączeń spoza Ingress,
   brak danych dostępowych w odpowiedzi.
-- Panel uruchomiono w Edge/Chromium z odpowiedziami API przygotowanymi z JSON-a.
-  32 pozycje diagnostyki, brak błędów JavaScript; szerokości 1360 i 390 px,
-  brak poziomego przepełnienia na telefonie. Zrzuty obok tego pliku pokazują
-  dane ze snapshotu, a nie połączenie z rzeczywistym kotłem.
+- Panel sprawdzono w przeglądarce z lokalnym serwerem demonstracyjnym i
+  syntetycznymi cyklami palnika. Sprawdzono zakres 6 h, własny przedział 04:00–05:00,
+  wybór cyklu i jego opis, brak błędów JavaScript, szerokości 1360 i 390 px.
+  Strona nie przepełnia ekranu telefonu; szeroki schemat i tabele przewijają się
+  we własnych kontenerach. Zrzuty pokazują dane demonstracyjne, nie odczyt kotła.
 - Parsowanie plików YAML zakończone poprawnie.
 
 ## Wymaga sprawdzenia na docelowym środowisku

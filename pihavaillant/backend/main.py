@@ -1,5 +1,4 @@
 import asyncio
-from collections import deque
 from contextlib import asynccontextmanager, suppress
 from datetime import datetime, timezone
 import json
@@ -10,11 +9,12 @@ import re
 import time
 import urllib.request
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Query, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from .ebus import EbusClient
 from .metrics import METRICS, MESSAGES, extract
 from .mqtt import Publisher
+from .history import History
 
 LOG = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parent.parent
@@ -51,7 +51,10 @@ class Monitor:
         self.options = options
         self.client = EbusClient(options["ebusd_host"], options["ebusd_port"], options["circuit"], options["timeout"])
         self.values = {}
-        self.history = deque(maxlen=720)
+        data_dir = Path(os.getenv("PIH_DATA_DIR", "/data" if os.getenv("SUPERVISOR_TOKEN") else "./data"))
+        self.history = History(options.get("history_path", str(data_dir / f"{options['device_id']}.sqlite3")), max_gap=5 + 2 * options["timeout"] + 2)
+        self.flame_due = 0
+        self.bus_lock = asyncio.Lock()
         self.due = {}
         self.publisher = None
         self.last_cycle = None
@@ -77,6 +80,9 @@ class Monitor:
 
     async def poll(self):
         for message in sorted(MESSAGES):
+            if message == "Flame":
+                continue
+            await self.sample_flame()
             if time.monotonic() < self.due.get(message, 0):
                 continue
             metrics = [m for m in METRICS if m.message == message]
@@ -84,7 +90,8 @@ class Monitor:
             error = None
             fields = {}
             try:
-                fields = await self.client.read(message, 300 if slow else self.options["poll_interval"])
+                async with self.bus_lock:
+                    fields = await self.client.read(message, 300 if slow else self.options["poll_interval"])
             except (OSError, TimeoutError, ValueError, asyncio.IncompleteReadError, asyncio.LimitOverrunError) as exc:
                 error = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
             stamp = datetime.now(timezone.utc).isoformat()
@@ -106,9 +113,25 @@ class Monitor:
         self.last_cycle = datetime.now(timezone.utc).isoformat()
         self.last_cycle_mono = time.monotonic()
         self.values["last_poll"] = {"value": self.last_cycle, "error": None}
-        self.history.append({"time": self.last_cycle, **{key: self.values.get(key, {}).get("value") for key in ("flow_temp", "return_temp", "storage_temp", "modulation", "flame")}})
+        self.history.add_temperatures(self.values)
         if self.publisher:
             self.publisher.publish(self.values)
+
+    async def sample_flame(self):
+        if time.monotonic() < self.flame_due:
+            return
+        value, error = None, None
+        try:
+            async with self.bus_lock:
+                fields = await self.client.read("Flame", 0)
+            value = extract(next(m for m in METRICS if m.key == "flame"), fields)
+        except (OSError, TimeoutError, ValueError, asyncio.IncompleteReadError, asyncio.LimitOverrunError) as exc:
+            error = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+        self.values["flame"] = {"value": value, "error": error, "updated_at": datetime.now(timezone.utc).isoformat()}
+        self.history.observe(value)
+        self.flame_due = time.monotonic() + 5
+        if self.publisher:
+            self.publisher.publish_metric(next(m for m in METRICS if m.key == "flame"), self.values["flame"])
 
     async def run(self):
         while True:
@@ -118,11 +141,16 @@ class Monitor:
                 await self.poll()
             except Exception as exc:
                 LOG.exception("Polling failed (%s)", type(exc).__name__)
-            await asyncio.sleep(max(1, self.options["poll_interval"] - (time.monotonic() - started)))
+            remaining = max(1, self.options["poll_interval"] - (time.monotonic() - started))
+            deadline = time.monotonic() + remaining
+            while time.monotonic() < deadline:
+                await self.sample_flame()
+                await asyncio.sleep(min(1, max(0, deadline - time.monotonic())))
 
     def snapshot(self):
         stale = self.last_cycle_mono is None or time.monotonic() - self.last_cycle_mono > self.options["stale_after"]
         return {"device_id": self.options["device_id"], "last_cycle": self.last_cycle,
+                "flame_max_gap": self.history.max_gap,
                 "stale": stale, "mqtt_connected": bool(self.publisher and self.publisher.connected),
                 "metrics": [{"key": m.key, "name": m.name, "unit": m.unit, "kind": m.kind,
                              **self.values.get(m.key, {"value": None, "error": "waiting"})} for m in METRICS]}
@@ -141,6 +169,7 @@ async def lifespan(app):
             await task
         if monitor.publisher:
             await asyncio.to_thread(monitor.publisher.stop)
+        monitor.history.close()
 
 
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
@@ -167,6 +196,29 @@ async def state():
     return app.state.monitor.snapshot()
 
 
+@app.get("/style.css")
+async def stylesheet():
+    return FileResponse(ROOT / "frontend" / "style.css", media_type="text/css")
+
+
+@app.get("/app.js")
+async def javascript():
+    return FileResponse(ROOT / "frontend" / "app.js", media_type="text/javascript")
+
+
+def time_range(start, end):
+    end = time.time() if end is None else min(end, time.time())
+    start = end - 86400 if start is None else start
+    if not (0 < end - start <= 7 * 86400):
+        raise HTTPException(400, "Choose a range between 1 second and 7 days")
+    return start, end
+
+
 @app.get("/api/history")
-async def history():
-    return list(app.state.monitor.history)
+async def history(start: float | None = Query(None, ge=0, allow_inf_nan=False), end: float | None = Query(None, ge=0, allow_inf_nan=False)):
+    return app.state.monitor.history.temperatures(*time_range(start, end))
+
+
+@app.get("/api/burner")
+async def burner(start: float | None = Query(None, ge=0, allow_inf_nan=False), end: float | None = Query(None, ge=0, allow_inf_nan=False)):
+    return app.state.monitor.history.report(*time_range(start, end))

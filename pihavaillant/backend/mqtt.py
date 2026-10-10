@@ -14,7 +14,7 @@ def discovery(metric, device_id, expiry):
         "availability": [{"topic": f"{base}/status"}, {"topic": f"{base}/{metric.key}/availability"}],
         "availability_mode": "all",
         "expire_after": expiry,
-        "device": {"identifiers": [f"pihavaillant_{device_id}"], "name": f"Vaillant {device_id}", "manufacturer": "Vaillant", "model": "ecoTEC plus (ebusd)", "sw_version": "0.1.0"},
+        "device": {"identifiers": [f"pihavaillant_{device_id}"], "name": f"Vaillant {device_id}", "manufacturer": "Vaillant", "model": "ecoTEC plus (ebusd)", "sw_version": "0.2.0"},
     }
     for key, value in [("unit_of_measurement", metric.unit), ("device_class", metric.device_class), ("state_class", metric.state_class)]:
         if value:
@@ -60,13 +60,17 @@ class Publisher:
         if not self.connected:
             return
         for metric in METRICS:
-            item = values.get(metric.key, {})
-            value = item.get("value")
-            prefix = f"{self.base}/{metric.key}"
-            if value is not None:
-                self.client.publish(f"{prefix}/state", str(value), qos=1, retain=False)
-            self.client.publish(f"{prefix}/availability", "online" if value is not None else "offline", qos=1, retain=True)
+            self.publish_metric(metric, values.get(metric.key, {}))
         self.client.publish(f"{self.base}/status", "online", qos=1, retain=True)
+
+    def publish_metric(self, metric, item):
+        if not self.connected:
+            return
+        value = item.get("value")
+        prefix = f"{self.base}/{metric.key}"
+        if value is not None:
+            self.client.publish(f"{prefix}/state", str(value), qos=1, retain=False)
+        self.client.publish(f"{prefix}/availability", "online" if value is not None else "offline", qos=1, retain=True)
 
     def stop(self):
         if self.connected:
