@@ -13,6 +13,17 @@ FIXTURE = Path(__file__).parent / "fixtures" / "ebusd-export.json"
 
 
 class ParsingTests(unittest.TestCase):
+    def test_room_temperature_and_wrong_circuit(self):
+        metric = BY_KEY["room_temp"]
+        self.assertEqual(extract(metric, parse_verbose("ctlv2 Z1RoomTemp value=24.1 °C")), 24.1)
+        for raw in ("value=-", "value=65535 °C", "value=24 bar", "value=24 °C;sensor=cutoff"):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                extract(metric, parse_verbose(raw))
+        item = {"name": "Z1RoomTemp", "circuit": "bai", "status": "ok", "fields": [{"field": "value", "value": 24.1}]}
+        self.assertNotIn("room_temp", parse_snapshot({"messages": [item]}))
+        item["circuit"] = "ctlv2"
+        self.assertEqual(parse_snapshot({"messages": [item]})["room_temp"]["value"], 24.1)
+
     def test_real_snapshot(self):
         values = parse_snapshot(json.loads(FIXTURE.read_text(encoding="utf-8")))
         self.assertEqual(values["return_temp"]["value"], 42.12)
@@ -58,6 +69,21 @@ class ParsingTests(unittest.TestCase):
 
 
 class TransportTests(unittest.IsolatedAsyncioTestCase):
+    async def test_room_routes_to_controller_and_boiler_keeps_configured_circuit(self):
+        commands = []
+        async def handle(reader, writer):
+            commands.append((await reader.readline()).decode())
+            writer.write(b"value=24.1\n\n")
+            await writer.drain()
+            writer.close()
+            await writer.wait_closed()
+        server = await asyncio.start_server(handle, "127.0.0.1", 0)
+        async with server:
+            client = EbusClient("127.0.0.1", server.sockets[0].getsockname()[1], circuit="custom")
+            self.assertEqual(extract(BY_KEY["room_temp"], await client.read("Z1RoomTemp")), 24.1)
+            await client.read("FlowTemp")
+        self.assertEqual(commands, ["read -V -m 30 -c ctlv2 Z1RoomTemp\n", "read -V -m 30 -c custom FlowTemp\n"])
+
     async def test_fragmented_response_and_allowlist(self):
         commands = []
         async def handle(reader, writer):
@@ -124,6 +150,7 @@ class PollTests(unittest.IsolatedAsyncioTestCase):
         from unittest.mock import AsyncMock
         fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
         raw = {item["name"]: item["raw"] for item in fixture["messages"]}
+        raw["Z1RoomTemp"] = "ctlv2 Z1RoomTemp value=24.1 °C"
         async def read(message, age):
             return parse_verbose(raw[message])
         monitor = Monitor({**load_options(), "history_path": ":memory:"})
@@ -132,10 +159,14 @@ class PollTests(unittest.IsolatedAsyncioTestCase):
         with patch("backend.main.asyncio.sleep", new_callable=AsyncMock):
             await monitor.poll()
             self.assertEqual(monitor.values["delta_temp"]["value"], 3.57)
+            self.assertEqual(monitor.values["room_temp"]["value"], 24.1)
+            raw["Z1RoomTemp"] = "ERR: element not found"
             self.assertIsNone(monitor.values["hwc_temp"]["value"])
             self.assertFalse(monitor.snapshot()["stale"])
             monitor.client.read.reset_mock()
             await monitor.poll()
+            self.assertIsNone(monitor.values["room_temp"]["value"])
+            self.assertEqual(monitor.values["flow_temp"]["value"], 45.69)
             self.assertNotIn("HcHours", [c.args[0] for c in monitor.client.read.call_args_list])
             monitor.client.read.side_effect = TimeoutError()
             await monitor.poll()

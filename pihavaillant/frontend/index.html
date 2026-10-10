@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiHA · Vaillant</title><link rel="stylesheet" href="style.css"></head>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiHA · Vaillant</title><link rel="stylesheet" href="style.css?v=0.3.0"></head>
 <body><main>
 <header><div class="brand"><span class="brand-icon">◈</span><div><div class="eyebrow">PIHA / DOM POD KONTROLĄ</div><h1>Twoja kotłownia<span>Vaillant ecoTEC plus</span></h1></div></div><div class="connection"><span id="connection" role="status">Łączenie…</span><small id="updated">Oczekiwanie na odczyty</small></div></header>
 <section class="plant panel"><div class="section-head"><div><span class="eyebrow">TERAZ</span><h2>Obieg ciepła</h2></div><span class="pill" id="plant-state">Stan nieznany</span></div>
@@ -39,6 +39,7 @@
 <div class="section-head compact"><h3>Cykle i zaobserwowane odcinki pracy</h3><span id="cycle-count" class="muted"></span></div>
 <div class="table-scroll"><table><thead><tr><th>Wykrycie pracy</th><th>Wykrycie wyłączenia</th><th>Czas w zakresie</th><th>Kompletność</th></tr></thead><tbody id="cycles"></tbody></table></div></section>
 <section class="panel"><div class="section-head"><div><span class="eyebrow">TEN SAM ZAKRES CZASU</span><h2>Temperatury instalacji</h2></div></div><div class="legend"><span style="color:#f3a56d">● Zasilanie</span><span style="color:#70d4c0">● Powrót</span><span style="color:#8daeff">● Zasobnik</span></div><div class="chart-scroll"><svg id="chart" viewBox="0 0 1000 230" class="chart" role="img" aria-label="Wykres temperatur"></svg></div><p class="note">Historia zapisywana na dysku dodatku. Brak odczytów przerywa linię wykresu.</p></section>
+<section class="panel"><div class="section-head"><div><span class="eyebrow">STEROWNIK CTLV2 · STREFA 1</span><h2>Temperatura w pokoju</h2></div></div><div class="chart-scroll"><svg id="room-chart" viewBox="0 0 1000 230" class="chart" role="img" aria-label="Historia temperatury pokojowej"></svg></div><p class="note">Rzeczywisty pomiar ze sterownika eBUS. Historia od aktualizacji do 0.3.0; brak odczytów przerywa linię.</p></section>
 <section class="panel"><details><summary>Wszystkie odczyty i diagnostyka</summary><div class="table-scroll"><table><thead><tr><th>Parametr</th><th>Wartość</th><th>Jakość</th></tr></thead><tbody id="details"></tbody></table></div></details></section>
 <footer>PiHA Vaillant · Monitor bez funkcji sterowania. Archiwum powstaje od instalacji wersji 0.2.0.</footer>
-</main><script src="app.js"></script></body></html>
+</main><script src="app.js?v=0.3.0"></script></body></html>

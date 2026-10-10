@@ -59,7 +59,7 @@ class History:
 
     def add_temperatures(self, values, ts=None):
         ts = time.time() if ts is None else ts
-        payload = {key: values.get(key, {}).get("value") for key in ("flow_temp", "return_temp", "storage_temp", "modulation")}
+        payload = {key: values.get(key, {}).get("value") for key in ("flow_temp", "return_temp", "storage_temp", "room_temp", "modulation")}
         self.db.execute("INSERT OR REPLACE INTO temperatures VALUES(?,?)", (ts, json.dumps(payload)))
         self.db.commit()
 

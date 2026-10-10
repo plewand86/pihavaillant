@@ -1,3 +1,10 @@
+# 0.3.0
+
+- Temperatura pokojowa strefy 1 ze sterownika CTLV2 (`ctlv2 Z1RoomTemp`).
+- Nowy sensor MQTT, kafelek i osobny wykres historii temperatury pokojowej.
+- Odczyt sterownika na tym samym połączeniu ebusd; obieg kotła nadal korzysta z opcji `circuit`.
+- Brak czujnika lub błędny pomiar oznacza niedostępność sensora; pozostałe odczyty działają dalej.
+
 # 0.2.0
 
 - Nowy schemat kotła, pompy obiegowej, ogrzewania, cyrkulacji i zasobnika CWU.

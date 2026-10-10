@@ -27,6 +27,7 @@ views:
           - sensor.pihavaillant_boiler_return_temp
           - sensor.pihavaillant_boiler_delta_temp
           - sensor.pihavaillant_boiler_storage_temp
+          - sensor.pihavaillant_boiler_room_temp
           - sensor.pihavaillant_boiler_outdoor_temp
           - sensor.pihavaillant_boiler_pressure
           - sensor.pihavaillant_boiler_fan_speed
@@ -38,6 +39,11 @@ views:
           - sensor.pihavaillant_boiler_flow_temp
           - sensor.pihavaillant_boiler_return_temp
           - sensor.pihavaillant_boiler_storage_temp
+      - type: history-graph
+        title: Temperatura pokojowa — strefa 1
+        hours_to_show: 24
+        entities:
+          - sensor.pihavaillant_boiler_room_temp
       - type: history-graph
         title: Cykle palnika
         hours_to_show: 6

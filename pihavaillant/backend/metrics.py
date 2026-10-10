@@ -18,9 +18,11 @@ class Metric:
     state_class: str | None = "measurement"
     diagnostic: bool = False
     slow: bool = False
+    circuit: str | None = None
 
 
 METRICS = [
+    Metric("room_temp", "Temperatura pokojowa (strefa 1)", "Z1RoomTemp", unit="°C", low=-30, high=60, device_class="temperature", circuit="ctlv2"),
     Metric("flow_temp", "Zasilanie", "FlowTemp", "temp", "°C", -30, 130, device_class="temperature"),
     Metric("return_temp", "Powrót", "ReturnTemp", "temp", "°C", -30, 130, device_class="temperature"),
     Metric("storage_temp", "Zasobnik CWU", "StorageTemp", "temp", "°C", -30, 100, device_class="temperature"),
@@ -107,11 +109,9 @@ def parse_snapshot(payload: dict) -> dict:
     """Import the supplied export for offline replay; never publish it as live data."""
     result = {}
     for item in payload["messages"]:
-        if item.get("circuit") != "bai":
-            continue
         fields = {f["field"]: f for f in item.get("fields", [])}
         for metric in METRICS:
-            if metric.message != item["name"]:
+            if metric.message != item["name"] or item.get("circuit") != (metric.circuit or "bai"):
                 continue
             try:
                 if item.get("status") != "ok":

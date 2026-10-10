@@ -81,6 +81,16 @@ class HistoryTests(unittest.TestCase):
         self.h.observe("OFF",100+91*86400)
         self.assertEqual(self.h.temperatures(99,106),[])
 
+    def test_room_history_preserves_older_records_and_gaps(self):
+        self.h.db.execute("INSERT INTO temperatures VALUES(?,?)", (100, '{"flow_temp":60}'))
+        self.h.add_temperatures({"room_temp": {"value": 24.1}}, 105)
+        self.h.add_temperatures({"room_temp": {"value": None}}, 110)
+        rows = self.h.temperatures(99, 111)
+        self.assertEqual(rows[0]["flow_temp"], 60)
+        self.assertNotIn("room_temp", rows[0])
+        self.assertEqual(rows[1]["room_temp"], 24.1)
+        self.assertIsNone(rows[2]["room_temp"])
+
     def test_temperature_response_bounded(self):
         for i in range(1600):
             self.h.add_temperatures({"flow_temp":{"value":i%100}},100+i)

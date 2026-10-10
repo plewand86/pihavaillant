@@ -1,8 +1,13 @@
-# Weryfikacja wydania 0.2.0 — 2026-10-10
+# Weryfikacja wydania 0.3.0 — 2026-10-10
 
 ## Wykonane lokalnie
 
-- 20 testów unittest: wszystkie zakończone poprawnie na Pythonie 3.12.14.
+- CTLV2: odczyt pokojowy 24,1°C, walidacja błędnych wartości, rozdzielenie
+  obiegów sterownika i kotła, awaria sterownika bez utraty odczytów kotła.
+- Historia pokojowa zachowuje poprzednie rekordy bez nowego pola i przerwy w danych.
+- Panel 0.3.0: kafelek 24,1°C i osobny wykres w zakresie 6 h; brak błędów JavaScript.
+
+- 23 testy unittest: wszystkie zakończone poprawnie na Pythonie 3.12.14.
 - Testy historii obejmują pełny cykl, timeout, długą przerwę, restart podczas
   pracy, przycinanie do zakresu, brak dopisywania czasu po ostatniej próbce,
   cofnięcie zegara, retencję i ograniczenie liczby próbek temperatur.
