@@ -2,7 +2,7 @@ title: Vaillant
 views:
   - title: Kocioł
     path: vaillant
-    icon: mdi:boiler
+    icon: mdi:water-boiler
     cards:
       - type: glance
         title: Praca kotła

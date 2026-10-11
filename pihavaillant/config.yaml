@@ -1,5 +1,5 @@
 name: PiHA Vaillant
-version: "0.5.0"
+version: "0.5.1"
 slug: pihavaillant
 description: "Monitor kotła Vaillant ecoTEC plus przez ebusd — tylko odczyt"
 url: https://github.com/plewand86/pihavaillant
@@ -11,7 +11,7 @@ startup: application
 boot: auto
 ingress: true
 ingress_port: 8090
-panel_icon: mdi:boiler
+panel_icon: mdi:water-boiler
 panel_title: Vaillant
 services:
   - mqtt:need

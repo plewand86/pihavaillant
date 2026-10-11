@@ -1,3 +1,8 @@
+# 0.5.1
+
+- Poprawiona ikona w bocznym menu Home Assistant: `mdi:water-boiler`.
+- Poprawiona nazwa ikony także w przykładowym dashboardzie.
+
 # 0.5.0
 
 - Nowy czytelny panel: kocioł oraz osobne karty podłogówki i zasobnika CWU.

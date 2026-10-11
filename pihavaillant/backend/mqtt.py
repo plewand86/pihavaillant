@@ -14,7 +14,7 @@ def discovery(metric, device_id, expiry):
         "availability": [{"topic": f"{base}/status"}, {"topic": f"{base}/{metric.key}/availability"}],
         "availability_mode": "all",
         "expire_after": expiry,
-        "device": {"identifiers": [f"pihavaillant_{device_id}"], "name": f"Vaillant {device_id}", "manufacturer": "Vaillant", "model": "ecoTEC plus (ebusd)", "sw_version": "0.5.0"},
+        "device": {"identifiers": [f"pihavaillant_{device_id}"], "name": f"Vaillant {device_id}", "manufacturer": "Vaillant", "model": "ecoTEC plus (ebusd)", "sw_version": "0.5.1"},
     }
     for key, value in [("unit_of_measurement", metric.unit), ("device_class", metric.device_class), ("state_class", metric.state_class)]:
         if value:
