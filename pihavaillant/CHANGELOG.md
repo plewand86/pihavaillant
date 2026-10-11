@@ -1,3 +1,11 @@
+# 0.5.0
+
+- Nowy czytelny panel: kocioł oraz osobne karty podłogówki i zasobnika CWU.
+- Aktywny obieg wyróżniony kolorem, strzałką i oznaczeniem GRZEJE.
+- Duży opis bieżącej pracy, pasek modulacji i uporządkowane temperatury.
+- Układ telefonu bez przewijania schematu na boki; szczegóły cykli rozwijane.
+- Brak połączenia wygasza aktywność i oznacza odczyty jako nieaktualne.
+
 # 0.4.0
 
 - Podział pracy palnika na podłogówkę (CO), zasobnik CWU i tryb nieustalony.

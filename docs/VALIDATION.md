@@ -1,6 +1,11 @@
-# Weryfikacja wydania 0.4.0 — 2026-10-11
+# Weryfikacja wydania 0.5.0 — 2026-10-11
 
 ## Wykonane lokalnie
+
+- Panel 0.5.0: widoki CO, CWU, palnik wyłączony i brak danych; osobne aktywne
+  karty, odczyty i pasek modulacji. Kontrola w przeglądarce przy szerokości 390 px
+  oraz na komputerze. Zrzuty `live-overview-demo.png`, `panel-desktop.png`
+  i `panel-mobile.png` przedstawiają dane demonstracyjne.
 
 - Panel 0.4.0: dwa kolory pracy, sumy CO/CWU, tabela przeznaczenia i zakres 6 h.
   Brak błędów JavaScript; układ 390 px bez przepełnienia strony.

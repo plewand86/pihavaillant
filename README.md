@@ -1,6 +1,6 @@
 # PiHA Vaillant
 
-**Wersja 0.4.0:** osobna historia pracy na podłogówkę i zasobnik CWU, temperatura pokojowa CTLV2 i schemat kotłowni.
+**Wersja 0.5.0:** nowy przejrzysty panel z osobnymi kartami kotła, podłogówki i CWU oraz wyróżnieniem aktywnego obiegu.
 W HA odśwież repozytoria w sklepie dodatków, otwórz PiHA Vaillant i wybierz
 **Aktualizuj**. Zachowano slug i identyfikatory encji; nie trzeba dodawać
 integracji ponownie. Nowa historia zaczyna być zbierana po aktualizacji.

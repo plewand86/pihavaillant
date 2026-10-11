@@ -1,5 +1,5 @@
 name: PiHA Vaillant
-version: "0.4.0"
+version: "0.5.0"
 slug: pihavaillant
 description: "Monitor kotła Vaillant ecoTEC plus przez ebusd — tylko odczyt"
 url: https://github.com/plewand86/pihavaillant

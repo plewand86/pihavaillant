@@ -1,33 +1,21 @@
 <!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiHA · Vaillant</title><link rel="stylesheet" href="style.css?v=0.4.0"></head>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiHA · Vaillant</title><link rel="stylesheet" href="style.css?v=0.5.0"></head>
 <body><main>
 <header><div class="brand"><span class="brand-icon">◈</span><div><div class="eyebrow">PIHA / DOM POD KONTROLĄ</div><h1>Twoja kotłownia<span>Vaillant ecoTEC plus</span></h1></div></div><div class="connection"><span id="connection" role="status">Łączenie…</span><small id="updated">Oczekiwanie na odczyty</small></div></header>
-<section class="plant panel"><div class="section-head"><div><span class="eyebrow">TERAZ</span><h2>Obieg ciepła</h2></div><span class="pill" id="plant-state">Stan nieznany</span></div>
-<div class="schematic-wrap"><svg id="plant" viewBox="0 0 1080 400" role="img" aria-label="Schemat kotła, pompy obiegowej, ogrzewania i zasobnika CWU">
-<defs><linearGradient id="case" x2="1" y2="1"><stop stop-color="#253847"/><stop offset="1" stop-color="#14232f"/></linearGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#b77651" stop-opacity=".4"/><stop offset="1" stop-color="#369cc0" stop-opacity=".18"/></linearGradient><pattern id="fins" width="15" height="80" patternUnits="userSpaceOnUse"><rect x="3" width="7" height="80" rx="3" fill="#728e9d"/></pattern></defs>
-<path class="pipe-bg" d="M320 155H590V85H760 M590 155H825 M320 280H590V355H1020V255H970 M590 280V195H760"/>
-<path class="pipe hot" d="M320 155H590V85H760 M590 155H825"/><path class="pipe cold" d="M320 280H590V355H1020V255H970 M590 280V195H760"/>
-<path id="flow-animation" class="flow-animation" d="M320 155H590V85H760 M590 155H825"/>
-<text x="375" y="114" class="svg-label">ZASILANIE</text><text x="375" y="143" class="svg-number" id="flow">— °C</text>
-<text x="375" y="326" class="svg-label">POWRÓT</text><text x="375" y="352" class="svg-number" id="return">— °C</text>
-<rect x="74" y="45" width="246" height="300" rx="24" fill="url(#case)" stroke="#49616e"/>
-<path d="M125 45V20H180V45" fill="none" stroke="#566b78" stroke-width="14"/>
-<text x="105" y="80" class="svg-label">VAILLANT / KOCIOŁ</text>
-<rect x="104" y="100" width="186" height="116" rx="16" fill="#0b1821" stroke="#354e5e"/>
-<g id="flame-symbol" transform="translate(132 118)"><path d="M24 0C34 22 16 25 29 38C35 30 35 24 35 24C60 50 44 73 23 73C-3 73-9 48 9 30C6 48 20 47 17 34C14 22 24 15 24 0Z" fill="currentColor"/><path d="M24 41C38 57 34 67 23 67C12 67 10 55 24 41" fill="#ffd8a1"/></g>
-<text x="212" y="149" class="svg-number" id="modulation">— %</text><text x="212" y="174" class="svg-small">modulacja</text>
-<text x="104" y="245" class="svg-white" id="flame-label">Stan płomienia nieznany</text><line x1="104" x2="290" y1="267" y2="267" stroke="#354e5e"/>
-<text x="104" y="293" class="svg-small">Wentylator</text><text x="104" y="319" class="svg-white" id="fan">— rpm</text>
-<circle cx="475" cy="280" r="29" fill="#14232f" stroke="#5e9faf" stroke-width="3"/>
-<g id="pump-rotor" class="rotor"><path d="M475 259Q500 269 480 279Q475 301 461 291Q447 270 473 277Z" fill="#7db8c2"/><circle cx="475" cy="280" r="5" fill="#d0f2ed"/></g>
-<text x="419" y="237" class="svg-small">Pompa obiegowa</text><text x="418" y="390" class="svg-white" id="pump-label">—</text>
-<rect x="760" y="45" width="200" height="155" rx="16" fill="#172b36" stroke="#49616e"/><rect x="785" y="91" width="150" height="75" fill="url(#fins)"/><text x="785" y="73" class="svg-label">PODŁOGÓWKA (CO)</text>
-<rect x="825" y="225" width="145" height="110" rx="32" fill="url(#water)" stroke="#668596" stroke-width="2"/>
-<path d="M825 155H847V255C847 275 944 259 944 281C944 301 851 284 851 304H970V255" fill="none" stroke="#d99064" stroke-width="4"/>
-<text x="847" y="249" class="svg-small">ZASOBNIK CWU</text><text x="1000" y="305" class="svg-number" text-anchor="end" id="storage">— °C</text>
-<circle cx="716" cy="355" r="19" fill="#14232f" stroke="#5e9faf" stroke-width="2"/><path id="circulation-symbol" d="M710 344L727 355L710 366Z" fill="#7db8c2"/>
-<text x="648" y="390" class="svg-small" id="circulation-label">Cyrkulacja: —</text>
-</svg></div><div class="plant-foot"><span><i class="dot hot-dot"></i>Zasilanie</span><span><i class="dot cold-dot"></i>Powrót</span><span class="muted">Schemat poglądowy · tylko odczyt · animacja według stanu pompy</span></div></section>
+<section class="plant panel" id="live-plant" data-mode="unknown">
+<div class="live-heading"><div><span class="eyebrow">PRACA KOTŁA · TERAZ</span><h2 id="plant-state" role="status">Oczekiwanie na odczyt</h2><p id="mode-description">Za chwilę pojawi się bieżący stan instalacji.</p></div><span class="live-badge" id="flame-label">Brak danych</span></div>
+<div class="plant-layout">
+<article class="boiler-card">
+<div class="equipment-title"><span>KOCIOŁ</span><span>ecoTEC plus</span></div>
+<div class="boiler-display"><svg id="flame-symbol" viewBox="0 0 64 80" aria-hidden="true"><path d="M32 3C45 29 23 29 39 44C45 33 45 26 45 26C72 57 52 77 30 77C3 77-1 48 16 31C12 51 27 48 23 35C20 22 32 16 32 3Z" fill="currentColor"/></svg><div><span class="display-caption">Modulacja zadana</span><strong id="modulation">— %</strong><div class="power-track"><span id="power-fill"></span></div></div></div>
+<div class="temperature-pair"><div><span><i class="dot hot-dot"></i>Zasilanie</span><strong id="flow">— °C</strong></div><div><span><i class="dot cold-dot"></i>Powrót</span><strong id="return">— °C</strong></div></div>
+<div class="equipment-line"><span>Wentylator</span><strong id="fan">— rpm</strong></div>
+<div class="equipment-line"><span class="pump-title"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor"/><g id="pump-rotor"><path d="M16 5Q29 9 19 16Q16 28 8 22Q2 12 15 14Z" fill="currentColor"/></g></svg>Pompa obiegowa</span><strong id="pump-label">—</strong></div>
+</article>
+<div class="heat-routes" id="flow-animation">
+<article class="destination heating-destination" id="heating-card"><div class="route-link" aria-hidden="true"><span>→</span></div><div class="destination-top"><span class="route-number">01 / CO</span><span class="route-status" id="heating-status">Brak danych</span></div><div class="destination-body"><svg class="equipment-icon floor-icon" viewBox="0 0 100 90" aria-hidden="true"><path d="M10 12H80Q94 12 94 25T80 38H20Q6 38 6 51T20 64H80Q94 64 94 77H10" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><div><h3>Ogrzewanie podłogowe</h3><p>Ciepło do pomieszczeń</p><div class="destination-reading"><strong id="room-reading">— °C</strong><span>w pokoju</span></div></div></div></article>
+<article class="destination dhw-destination" id="dhw-card"><div class="route-link" aria-hidden="true"><span>→</span></div><div class="destination-top"><span class="route-number">02 / CWU</span><span class="route-status" id="dhw-status">Brak danych</span></div><div class="destination-body"><svg class="equipment-icon" viewBox="0 0 100 90" aria-hidden="true"><rect x="24" y="5" width="52" height="80" rx="20" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 30H60Q72 30 60 40L40 47Q28 54 40 54H60Q72 54 60 64L40 70H76" fill="none" stroke="currentColor" stroke-width="3"/><path d="M30 80H70" stroke="currentColor" stroke-width="3"/></svg><div><h3>Zasobnik ciepłej wody</h3><p>Woda do kranów i kąpieli</p><div class="destination-reading"><strong id="storage">— °C</strong><span>cel <b id="storage-goal">— °C</b></span></div></div></div><div class="circulation-row"><i id="circulation-symbol"></i><span id="circulation-label">Cyrkulacja: —</span></div></article>
+</div></div><div class="live-foot">Podświetlony obieg pokazuje, dokąd kocioł kieruje ciepło podczas pracy palnika.</div></section>
 <div class="grid" id="tiles"></div>
 <section class="panel history-panel"><div class="section-head"><div><span class="eyebrow">HISTORIA PALNIKA</span><h2>Kiedy grzał Twój kocioł?</h2></div><div class="presets" aria-label="Zakres historii"><button data-hours="6">6 h</button><button data-hours="24" class="selected">24 h</button><button data-hours="168">7 dni</button></div></div>
 <form id="range-form" class="range-form"><label>Od<input id="range-start" type="datetime-local" required></label><label>Do<input id="range-end" type="datetime-local" required></label><button type="submit">Pokaż zakres</button><span class="muted">Maks. 7 dni · archiwum 90 dni</span></form>
@@ -37,10 +25,10 @@
 <div class="legend"><span style="color:#70d4c0">● Podłogówka (CO)</span><span style="color:#e8a06a">● Zasobnik CWU</span><span style="color:#c2a5ff">● Tryb nieustalony</span><span><i class="dot cold-dot"></i>Wyłączony</span><span><i class="dot unknown-dot"></i>Brak danych</span></div>
 <p class="note">Czasy wykrycia, nie pomiar co do sekundy. Odczyt płomienia co około 5 s; opóźnienia eBUS mogą wydłużyć odstęp. Krótkie cykle między odczytami mogą pozostać niewykryte. Podział CO/CWU od wersji 0.4.0 według zaworu przełączającego. Starsza historia i pozycje pośrednie mają tryb nieustalony. Zmiana trybu dzieli odcinek, ale nie zwiększa liczby zapłonów.</p>
 <p id="cycle-detail" class="cycle-detail">Wybierz kolorowy odcinek pracy, aby sprawdzić jego czas.</p>
-<div class="section-head compact"><h3>Cykle i zaobserwowane odcinki pracy</h3><span id="cycle-count" class="muted"></span></div>
-<div class="table-scroll"><table><thead><tr><th>Przeznaczenie</th><th>Początek odcinka</th><th>Koniec odcinka</th><th>Czas w zakresie</th><th>Kompletność</th></tr></thead><tbody id="cycles"></tbody></table></div></section>
+<details class="cycle-disclosure"><summary>Pokaż odcinki pracy i dokładne godziny</summary><div class="section-head compact"><h3>Odcinki pracy</h3><span id="cycle-count" class="muted"></span></div>
+<div class="table-scroll"><table><thead><tr><th>Przeznaczenie</th><th>Początek odcinka</th><th>Koniec odcinka</th><th>Czas w zakresie</th><th>Kompletność</th></tr></thead><tbody id="cycles"></tbody></table></div></details></section>
 <section class="panel"><div class="section-head"><div><span class="eyebrow">TEN SAM ZAKRES CZASU</span><h2>Temperatury instalacji</h2></div></div><div class="legend"><span style="color:#f3a56d">● Zasilanie</span><span style="color:#70d4c0">● Powrót</span><span style="color:#8daeff">● Zasobnik</span></div><div class="chart-scroll"><svg id="chart" viewBox="0 0 1000 230" class="chart" role="img" aria-label="Wykres temperatur"></svg></div><p class="note">Historia zapisywana na dysku dodatku. Brak odczytów przerywa linię wykresu.</p></section>
 <section class="panel"><div class="section-head"><div><span class="eyebrow">STEROWNIK CTLV2 · STREFA 1</span><h2>Temperatura w pokoju</h2></div></div><div class="chart-scroll"><svg id="room-chart" viewBox="0 0 1000 230" class="chart" role="img" aria-label="Historia temperatury pokojowej"></svg></div><p class="note">Rzeczywisty pomiar ze sterownika eBUS. Historia od aktualizacji do 0.3.0; brak odczytów przerywa linię.</p></section>
 <section class="panel"><details><summary>Wszystkie odczyty i diagnostyka</summary><div class="table-scroll"><table><thead><tr><th>Parametr</th><th>Wartość</th><th>Jakość</th></tr></thead><tbody id="details"></tbody></table></div></details></section>
 <footer>PiHA Vaillant · Monitor bez funkcji sterowania. Archiwum powstaje od instalacji wersji 0.2.0.</footer>
-</main><script src="app.js?v=0.4.0"></script></body></html>
+</main><script src="app.js?v=0.5.0"></script></body></html>
