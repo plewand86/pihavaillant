@@ -1,13 +1,20 @@
-# Weryfikacja wydania 0.3.0 — 2026-10-10
+# Weryfikacja wydania 0.4.0 — 2026-10-11
 
 ## Wykonane lokalnie
+
+- Panel 0.4.0: dwa kolory pracy, sumy CO/CWU, tabela przeznaczenia i zakres 6 h.
+  Brak błędów JavaScript; układ 390 px bez przepełnienia strony.
+  `history-modes-demo.png` przedstawia dane syntetyczne.
+
+- Podział CO/CWU: świeży odczyt zaworu, pozycja pośrednia, błąd odczytu,
+  palnik wyłączony, zmiana trybu bez zapłonu, przycięcie czasów i migracja starej bazy.
 
 - CTLV2: odczyt pokojowy 24,1°C, walidacja błędnych wartości, rozdzielenie
   obiegów sterownika i kotła, awaria sterownika bez utraty odczytów kotła.
 - Historia pokojowa zachowuje poprzednie rekordy bez nowego pola i przerwy w danych.
 - Panel 0.3.0: kafelek 24,1°C i osobny wykres w zakresie 6 h; brak błędów JavaScript.
 
-- 23 testy unittest: wszystkie zakończone poprawnie na Pythonie 3.12.14.
+- 26 testów unittest: wszystkie zakończone poprawnie na Pythonie 3.12.14.
 - Testy historii obejmują pełny cykl, timeout, długą przerwę, restart podczas
   pracy, przycinanie do zakresu, brak dopisywania czasu po ostatniej próbce,
   cofnięcie zegara, retencję i ograniczenie liczby próbek temperatur.

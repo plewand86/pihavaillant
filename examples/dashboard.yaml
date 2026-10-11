@@ -53,6 +53,8 @@ views:
       - type: entities
         title: Liczniki i diagnostyka
         entities:
+          - sensor.pihavaillant_boiler_burner_mode
+          - sensor.pihavaillant_boiler_valve_position
           - sensor.pihavaillant_boiler_hc_hours
           - sensor.pihavaillant_boiler_hwc_hours
           - sensor.pihavaillant_boiler_hc_starts

@@ -52,7 +52,7 @@ class Monitor:
         self.client = EbusClient(options["ebusd_host"], options["ebusd_port"], options["circuit"], options["timeout"])
         self.values = {}
         data_dir = Path(os.getenv("PIH_DATA_DIR", "/data" if os.getenv("SUPERVISOR_TOKEN") else "./data"))
-        self.history = History(options.get("history_path", str(data_dir / f"{options['device_id']}.sqlite3")), max_gap=5 + 2 * options["timeout"] + 2)
+        self.history = History(options.get("history_path", str(data_dir / f"{options['device_id']}.sqlite3")), max_gap=5 + 3 * options["timeout"] + 2)
         self.flame_due = 0
         self.bus_lock = asyncio.Lock()
         self.due = {}
@@ -80,7 +80,7 @@ class Monitor:
 
     async def poll(self):
         for message in sorted(MESSAGES):
-            if message == "Flame":
+            if message in ("Flame", "PositionValveSet"):
                 continue
             await self.sample_flame()
             if time.monotonic() < self.due.get(message, 0):
@@ -128,10 +128,25 @@ class Monitor:
         except (OSError, TimeoutError, ValueError, asyncio.IncompleteReadError, asyncio.LimitOverrunError) as exc:
             error = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
         self.values["flame"] = {"value": value, "error": error, "updated_at": datetime.now(timezone.utc).isoformat()}
-        self.history.observe(value)
+        mode, valve, valve_error = "unknown", None, "waiting"
+        if value == "ON":
+            try:
+                async with self.bus_lock:
+                    fields = await self.client.read("PositionValveSet", 0)
+                valve = extract(next(m for m in METRICS if m.key == "valve_position"), fields)
+                valve_error = None
+                mode = {0: "heating", 100: "dhw"}.get(valve, "unknown")
+            except (OSError, TimeoutError, ValueError, asyncio.IncompleteReadError, asyncio.LimitOverrunError) as exc:
+                valve_error = str(exc) if isinstance(exc, ValueError) else type(exc).__name__
+        stamp = datetime.now(timezone.utc).isoformat()
+        self.values["valve_position"] = {"value": valve, "error": valve_error, "updated_at": stamp}
+        self.values["burner_mode"] = {"value": (mode if value == "ON" else "off" if value == "OFF" else None), "error": error, "updated_at": stamp}
+        self.history.observe(value, mode=mode)
         self.flame_due = time.monotonic() + 5
         if self.publisher:
             self.publisher.publish_metric(next(m for m in METRICS if m.key == "flame"), self.values["flame"])
+            for key in ("burner_mode", "valve_position"):
+                self.publisher.publish_metric(next(m for m in METRICS if m.key == key), self.values[key])
 
     async def run(self):
         while True:

@@ -145,6 +145,26 @@ class DiscoveryTests(unittest.TestCase):
 
 
 class PollTests(unittest.IsolatedAsyncioTestCase):
+    async def test_burner_mode_uses_fresh_valve_and_handles_failure(self):
+        from backend.main import Monitor, load_options
+        from unittest.mock import AsyncMock
+        monitor = Monitor({**load_options(), "history_path": ":memory:"})
+        self.addCleanup(monitor.history.close)
+        for valve, expected in [("0", "heating"), ("100", "dhw"), ("40", "unknown"), ("ERR: no data", "unknown")]:
+            async def read(message, age):
+                self.assertEqual(age, 0)
+                return parse_verbose("value=on" if message == "Flame" else valve if valve.startswith("ERR") else "value=" + valve)
+            monitor.client.read = AsyncMock(side_effect=read)
+            monitor.flame_due = 0
+            await monitor.sample_flame()
+            self.assertEqual(monitor.values["burner_mode"]["value"], expected)
+            self.assertEqual(monitor.values["flame"]["value"], "ON")
+        monitor.client.read = AsyncMock(return_value=parse_verbose("value=off"))
+        monitor.flame_due = 0
+        await monitor.sample_flame()
+        self.assertEqual(monitor.values["burner_mode"]["value"], "off")
+        self.assertEqual(monitor.client.read.call_count, 1)
+
     async def test_poll_isolates_fault_and_slow_schedule(self):
         from backend.main import Monitor, load_options
         from unittest.mock import AsyncMock

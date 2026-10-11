@@ -1,3 +1,10 @@
+# 0.4.0
+
+- Podział pracy palnika na podłogówkę (CO), zasobnik CWU i tryb nieustalony.
+- Osobne czasy, kolory osi czasu, przeznaczenie odcinków i bieżący tryb w panelu oraz MQTT.
+- Świeży odczyt zaworu przy próbkowaniu pracującego palnika; bez zgadywania z temperatur.
+- Migracja zachowuje historię i liczniki zapłonów; starsze odcinki pozostają nieprzypisane.
+
 # 0.3.0
 
 - Temperatura pokojowa strefy 1 ze sterownika CTLV2 (`ctlv2 Z1RoomTemp`).

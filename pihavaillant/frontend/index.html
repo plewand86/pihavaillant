@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiHA · Vaillant</title><link rel="stylesheet" href="style.css?v=0.3.0"></head>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiHA · Vaillant</title><link rel="stylesheet" href="style.css?v=0.4.0"></head>
 <body><main>
 <header><div class="brand"><span class="brand-icon">◈</span><div><div class="eyebrow">PIHA / DOM POD KONTROLĄ</div><h1>Twoja kotłownia<span>Vaillant ecoTEC plus</span></h1></div></div><div class="connection"><span id="connection" role="status">Łączenie…</span><small id="updated">Oczekiwanie na odczyty</small></div></header>
 <section class="plant panel"><div class="section-head"><div><span class="eyebrow">TERAZ</span><h2>Obieg ciepła</h2></div><span class="pill" id="plant-state">Stan nieznany</span></div>
@@ -21,7 +21,7 @@
 <circle cx="475" cy="280" r="29" fill="#14232f" stroke="#5e9faf" stroke-width="3"/>
 <g id="pump-rotor" class="rotor"><path d="M475 259Q500 269 480 279Q475 301 461 291Q447 270 473 277Z" fill="#7db8c2"/><circle cx="475" cy="280" r="5" fill="#d0f2ed"/></g>
 <text x="419" y="237" class="svg-small">Pompa obiegowa</text><text x="418" y="390" class="svg-white" id="pump-label">—</text>
-<rect x="760" y="45" width="200" height="155" rx="16" fill="#172b36" stroke="#49616e"/><rect x="785" y="91" width="150" height="75" fill="url(#fins)"/><text x="785" y="73" class="svg-label">OGRZEWANIE</text>
+<rect x="760" y="45" width="200" height="155" rx="16" fill="#172b36" stroke="#49616e"/><rect x="785" y="91" width="150" height="75" fill="url(#fins)"/><text x="785" y="73" class="svg-label">PODŁOGÓWKA (CO)</text>
 <rect x="825" y="225" width="145" height="110" rx="32" fill="url(#water)" stroke="#668596" stroke-width="2"/>
 <path d="M825 155H847V255C847 275 944 259 944 281C944 301 851 284 851 304H970V255" fill="none" stroke="#d99064" stroke-width="4"/>
 <text x="847" y="249" class="svg-small">ZASOBNIK CWU</text><text x="1000" y="305" class="svg-number" text-anchor="end" id="storage">— °C</text>
@@ -32,14 +32,15 @@
 <section class="panel history-panel"><div class="section-head"><div><span class="eyebrow">HISTORIA PALNIKA</span><h2>Kiedy grzał Twój kocioł?</h2></div><div class="presets" aria-label="Zakres historii"><button data-hours="6">6 h</button><button data-hours="24" class="selected">24 h</button><button data-hours="168">7 dni</button></div></div>
 <form id="range-form" class="range-form"><label>Od<input id="range-start" type="datetime-local" required></label><label>Do<input id="range-end" type="datetime-local" required></label><button type="submit">Pokaż zakres</button><span class="muted">Maks. 7 dni · archiwum 90 dni</span></form>
 <p id="history-error" class="warn" role="status"></p><div class="stats"><div><span>Czas pracy w zakresie</span><strong id="on-time">—</strong></div><div><span>Wykryte zapłony</span><strong id="starts">—</strong></div><div><span>Pokrycie odczytami</span><strong id="coverage">—</strong></div><div><span>Brak danych</span><strong id="unknown">—</strong></div></div>
-<div class="chart-scroll"><svg id="burner-chart" viewBox="0 0 1000 130" class="burner-chart" role="img" aria-label="Oś czasu pracy palnika: pomarańczowy — praca, niebieski — wyłączony, kreskowanie — brak danych"></svg></div>
-<div class="legend"><span><i class="dot hot-dot"></i>Palnik pracował</span><span><i class="dot cold-dot"></i>Wyłączony</span><span><i class="dot unknown-dot"></i>Brak danych</span></div>
-<p class="note">Czasy wykrycia, nie pomiar co do sekundy. Odczyt płomienia co około 5 s; opóźnienia eBUS mogą wydłużyć odstęp. Krótkie cykle między odczytami mogą pozostać niewykryte.</p>
-<p id="cycle-detail" class="cycle-detail">Wybierz pomarańczowy odcinek, aby sprawdzić jego czas.</p>
+<div class="stats mode-stats"><div><span style="color:#70d4c0">Podłogówka (CO)</span><strong id="heating-time">—</strong></div><div><span style="color:#e8a06a">Zasobnik CWU</span><strong id="dhw-time">—</strong></div><div><span style="color:#c2a5ff">Palnik — tryb nieustalony</span><strong id="unclassified-time">—</strong></div></div>
+<div class="chart-scroll"><svg id="burner-chart" viewBox="0 0 1000 130" class="burner-chart" role="img" aria-label="Oś czasu pracy palnika: zielony — podłogówka, pomarańczowy — CWU, fioletowy — tryb nieustalony, niebieski — wyłączony, kreskowanie — brak danych"></svg></div>
+<div class="legend"><span style="color:#70d4c0">● Podłogówka (CO)</span><span style="color:#e8a06a">● Zasobnik CWU</span><span style="color:#c2a5ff">● Tryb nieustalony</span><span><i class="dot cold-dot"></i>Wyłączony</span><span><i class="dot unknown-dot"></i>Brak danych</span></div>
+<p class="note">Czasy wykrycia, nie pomiar co do sekundy. Odczyt płomienia co około 5 s; opóźnienia eBUS mogą wydłużyć odstęp. Krótkie cykle między odczytami mogą pozostać niewykryte. Podział CO/CWU od wersji 0.4.0 według zaworu przełączającego. Starsza historia i pozycje pośrednie mają tryb nieustalony. Zmiana trybu dzieli odcinek, ale nie zwiększa liczby zapłonów.</p>
+<p id="cycle-detail" class="cycle-detail">Wybierz kolorowy odcinek pracy, aby sprawdzić jego czas.</p>
 <div class="section-head compact"><h3>Cykle i zaobserwowane odcinki pracy</h3><span id="cycle-count" class="muted"></span></div>
-<div class="table-scroll"><table><thead><tr><th>Wykrycie pracy</th><th>Wykrycie wyłączenia</th><th>Czas w zakresie</th><th>Kompletność</th></tr></thead><tbody id="cycles"></tbody></table></div></section>
+<div class="table-scroll"><table><thead><tr><th>Przeznaczenie</th><th>Początek odcinka</th><th>Koniec odcinka</th><th>Czas w zakresie</th><th>Kompletność</th></tr></thead><tbody id="cycles"></tbody></table></div></section>
 <section class="panel"><div class="section-head"><div><span class="eyebrow">TEN SAM ZAKRES CZASU</span><h2>Temperatury instalacji</h2></div></div><div class="legend"><span style="color:#f3a56d">● Zasilanie</span><span style="color:#70d4c0">● Powrót</span><span style="color:#8daeff">● Zasobnik</span></div><div class="chart-scroll"><svg id="chart" viewBox="0 0 1000 230" class="chart" role="img" aria-label="Wykres temperatur"></svg></div><p class="note">Historia zapisywana na dysku dodatku. Brak odczytów przerywa linię wykresu.</p></section>
 <section class="panel"><div class="section-head"><div><span class="eyebrow">STEROWNIK CTLV2 · STREFA 1</span><h2>Temperatura w pokoju</h2></div></div><div class="chart-scroll"><svg id="room-chart" viewBox="0 0 1000 230" class="chart" role="img" aria-label="Historia temperatury pokojowej"></svg></div><p class="note">Rzeczywisty pomiar ze sterownika eBUS. Historia od aktualizacji do 0.3.0; brak odczytów przerywa linię.</p></section>
 <section class="panel"><details><summary>Wszystkie odczyty i diagnostyka</summary><div class="table-scroll"><table><thead><tr><th>Parametr</th><th>Wartość</th><th>Jakość</th></tr></thead><tbody id="details"></tbody></table></div></details></section>
 <footer>PiHA Vaillant · Monitor bez funkcji sterowania. Archiwum powstaje od instalacji wersji 0.2.0.</footer>
-</main><script src="app.js?v=0.3.0"></script></body></html>
+</main><script src="app.js?v=0.4.0"></script></body></html>

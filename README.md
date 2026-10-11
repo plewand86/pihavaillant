@@ -1,6 +1,6 @@
 # PiHA Vaillant
 
-**Wersja 0.3.0:** temperatura pokojowa ze sterownika CTLV2, schemat kotłowni i trwała historia palnika.
+**Wersja 0.4.0:** osobna historia pracy na podłogówkę i zasobnik CWU, temperatura pokojowa CTLV2 i schemat kotłowni.
 W HA odśwież repozytoria w sklepie dodatków, otwórz PiHA Vaillant i wybierz
 **Aktualizuj**. Zachowano slug i identyfikatory encji; nie trzeba dodawać
 integracji ponownie. Nowa historia zaczyna być zbierana po aktualizacji.
@@ -216,3 +216,21 @@ Oczekiwane pole w konfiguracji CTLV2 to `value`, np. `value=24.1 °C`.
 Strefy 2 i 3 oraz temperatura zadana miały w dostarczonej liście `no data stored`;
 nie są automatycznie traktowane jako aktywne czujniki.
 Źródło definicji: https://ebus.github.io/en/vaillant/15.ctlv2.csv.
+
+## Podział CO / CWU (0.4.0)
+
+Podczas pracy płomienia odczytywany jest `bai PositionValveSet` bez pamięci podręcznej.
+Według definicji dla BAI HW7603: 0 = CO, 100 = CWU, 40 = pozycja pośrednia.
+Źródło: https://ebus.github.io/en/vaillant/bai.0010043897.inc.
+Tylko 0 i 100 klasyfikują pracę; inne wartości i błędy oznaczają tryb nieustalony.
+CO opisano jako podłogówkę zgodnie z instalacją użytkownika; pomiar nie rozdziela
+wielu odbiorników CO. Żądanie CWU samo w sobie nie dowodzi grzania zasobnika.
+
+Panel sumuje czas podłogówki, CWU i nieustalony do łącznego czasu palnika.
+Zmiana zaworu podczas pracy dzieli odcinki bez naliczania kolejnego zapłonu.
+Czasy są momentami wykrycia w kolejnych odczytach, a nie pomiarem fizycznego
+przełączenia co do sekundy. Odczyty płomienia i zaworu są sekwencyjne.
+Stare dane pozostają w bazie jako tryb nieustalony; nie są klasyfikowane wstecz.
+W HA pojawia się sensor `sensor.pihavaillant_boiler_burner_mode`
+(`heating`, `dhw`, `unknown`, `off`) i diagnostyka `valve_position`.
+Aktualizacja dodatku zachowuje konfigurację i archiwum.

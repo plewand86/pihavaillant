@@ -102,3 +102,38 @@ class HistoryTests(unittest.TestCase):
         report=self.h.report(90,120)
         self.assertEqual(report["on_seconds"],10)
         self.assertEqual(report["unknown_seconds"],20)
+
+    def test_mode_switch_is_not_an_ignition(self):
+        self.h.observe("OFF", 100)
+        self.h.observe("ON", 105, "heating")
+        self.h.observe("ON", 110, "heating")
+        self.h.observe("ON", 115, "dhw")
+        self.h.observe("ON", 120, "unknown")
+        self.h.observe("OFF", 125)
+        result = self.h.report(100, 125)
+        self.assertEqual(result["starts"], 1)
+        self.assertEqual(result["heating_seconds"], 10)
+        self.assertEqual(result["dhw_seconds"], 5)
+        self.assertEqual(result["unclassified_seconds"], 5)
+        self.assertEqual(result["on_seconds"], 20)
+        clipped = self.h.report(108, 122)
+        self.assertEqual(clipped["heating_seconds"], 7)
+        self.assertEqual(clipped["unclassified_seconds"], 2)
+
+    def test_old_database_migration(self):
+        import sqlite3
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "old.sqlite3"
+            db = sqlite3.connect(path)
+            db.execute("CREATE TABLE intervals(id INTEGER PRIMARY KEY,start REAL,end REAL,state TEXT,start_known INTEGER,end_known INTEGER DEFAULT 0)")
+            db.execute("INSERT INTO intervals VALUES(1,100,110,'ON',1,1)")
+            db.commit()
+            db.close()
+            h = History(path)
+            result = h.report(99, 115)
+            self.assertEqual(result["unclassified_seconds"], 10)
+            self.assertEqual(result["starts"], 1)
+            h.close()
+            h = History(path)
+            self.assertEqual(h.report(99, 115)["starts"], 1)
+            h.close()

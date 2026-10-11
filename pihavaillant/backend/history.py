@@ -20,13 +20,21 @@ class History:
             CREATE TABLE IF NOT EXISTS temperatures(ts REAL PRIMARY KEY, payload TEXT NOT NULL);
         """)
         self.active = None  # Never join intervals across a process restart.
+        columns = {row[1] for row in self.db.execute("PRAGMA table_info(intervals)")}
+        if "mode" not in columns:
+            self.db.execute("ALTER TABLE intervals ADD COLUMN mode TEXT NOT NULL DEFAULT 'unknown'")
+        if "ignition" not in columns:
+            self.db.execute("ALTER TABLE intervals ADD COLUMN ignition INTEGER NOT NULL DEFAULT 0")
+            self.db.execute("UPDATE intervals SET ignition=start_known WHERE state='ON'")
+        self.db.commit()
         self.last = None
         self.max_gap = max_gap
         self.retention_days = retention_days
         self.last_prune = 0
         self.latest = self.db.execute("SELECT MAX(end) FROM intervals").fetchone()[0]
 
-    def observe(self, state, ts=None):
+    def observe(self, state, ts=None, mode="unknown"):
+        mode = mode if state == "ON" and mode in ("heating", "dhw") else "unknown"
         ts = time.time() if ts is None else ts
         if self.latest is not None and ts <= self.latest:
             # Clock rollback: wait for the clock to catch up, never overlap time.
@@ -41,14 +49,15 @@ class History:
         if state in ("ON", "OFF"):
             if self.active is not None and continuous:
                 self.db.execute("UPDATE intervals SET end=? WHERE id=?", (ts, self.active))
-                if state != previous[1]:
+                if state != previous[1] or mode != previous[2]:
                     self.db.execute("UPDATE intervals SET end_known=1 WHERE id=?", (self.active,))
                     self.active = None
             if self.active is None:
-                known = continuous and previous[1] in ("ON", "OFF") and state != previous[1]
-                cursor = self.db.execute("INSERT INTO intervals(start,end,state,start_known) VALUES(?,?,?,?)", (ts, ts, state, int(known)))
+                ignition = continuous and previous[1] == "OFF" and state == "ON"
+                known = continuous and previous[1] in ("ON", "OFF") and (state != previous[1] or mode != previous[2])
+                cursor = self.db.execute("INSERT INTO intervals(start,end,state,start_known,mode,ignition) VALUES(?,?,?,?,?,?)", (ts, ts, state, int(known), mode, int(ignition)))
                 self.active = cursor.lastrowid
-        self.last = (ts, state)
+        self.last = (ts, state, mode)
         self.db.commit()
         if ts - self.last_prune > 3600:
             cutoff = ts - self.retention_days * 86400
@@ -78,15 +87,18 @@ class History:
         totals = self.db.execute("""SELECT state,SUM(MAX(0,MIN(end,?)-MAX(start,?)))
             FROM intervals WHERE end>=? AND start<=? GROUP BY state""", (end, start, start, end)).fetchall()
         sums = dict(totals)
-        starts = self.db.execute("SELECT COUNT(*) FROM intervals WHERE state='ON' AND start_known=1 AND start>=? AND start<=?", (start, end)).fetchone()[0]
+        starts = self.db.execute("SELECT COUNT(*) FROM intervals WHERE ignition=1 AND start>=? AND start<=?", (start, end)).fetchone()[0]
+        modes = dict(self.db.execute("SELECT mode,SUM(MAX(0,MIN(end,?)-MAX(start,?))) FROM intervals WHERE state='ON' AND end>=? AND start<=? GROUP BY mode", (end, start, start, end)).fetchall())
         count = self.db.execute("SELECT COUNT(*) FROM intervals WHERE end>=? AND start<=?", (start, end)).fetchone()[0]
-        rows = self.db.execute("SELECT id,start,end,state,start_known,end_known FROM intervals WHERE end>=? AND start<=? ORDER BY start DESC LIMIT 5000", (start, end)).fetchall()
+        rows = self.db.execute("SELECT id,start,end,state,start_known,end_known,mode,ignition FROM intervals WHERE end>=? AND start<=? ORDER BY start DESC LIMIT 5000", (start, end)).fetchall()
         segments = [{"start": a, "end": b, "state": state, "start_known": bool(sk), "end_known": bool(ek),
+                     "mode": mode, "ignition": bool(ignition),
                      "ongoing": ident == self.active and self.last is not None and 0 <= time.time() - self.last[0] <= self.max_gap,
                      "seconds_in_range": max(0, min(b, end) - max(a, start))}
-                    for ident, a, b, state, sk, ek in reversed(rows)]
+                    for ident, a, b, state, sk, ek, mode, ignition in reversed(rows)]
         known = sums.get("ON", 0) + sums.get("OFF", 0)
         return {"start": start, "end": end, "on_seconds": sums.get("ON", 0), "off_seconds": sums.get("OFF", 0),
+                "heating_seconds": modes.get("heating", 0), "dhw_seconds": modes.get("dhw", 0), "unclassified_seconds": modes.get("unknown", 0),
                 "unknown_seconds": max(0, end - start - known), "starts": starts,
                 "coverage": min(100, known * 100 / (end - start)), "segments": segments,
                 "truncated": count > 5000, "max_gap": self.max_gap, "retention_days": self.retention_days}

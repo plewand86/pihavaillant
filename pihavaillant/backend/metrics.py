@@ -22,6 +22,8 @@ class Metric:
 
 
 METRICS = [
+    Metric("valve_position", "Pozycja zaworu CO/CWU", "PositionValveSet", high=100, diagnostic=True),
+    Metric("burner_mode", "Przeznaczenie pracy palnika", "", kind="text", state_class=None),
     Metric("room_temp", "Temperatura pokojowa (strefa 1)", "Z1RoomTemp", unit="°C", low=-30, high=60, device_class="temperature", circuit="ctlv2"),
     Metric("flow_temp", "Zasilanie", "FlowTemp", "temp", "°C", -30, 130, device_class="temperature"),
     Metric("return_temp", "Powrót", "ReturnTemp", "temp", "°C", -30, 130, device_class="temperature"),
