@@ -148,6 +148,27 @@ class Monitor:
             for key in ("burner_mode", "valve_position"):
                 self.publisher.publish_metric(next(m for m in METRICS if m.key == key), self.values[key])
 
+    async def set_room_override(self, temperature, duration):
+        async with self.bus_lock:
+            replies = await self.client.set_room_override(temperature, duration)
+            setpoint_fields = await self.client.read("Z1ActualRoomTempDesired", 0)
+            override_fields = await self.client.read("Z1QuickVetoTemp", 0)
+            duration_fields = await self.client.read("Z1QuickVetoDuration", 0)
+        stamp = datetime.now(timezone.utc).isoformat()
+        for key, fields in (("room_setpoint", setpoint_fields), ("quick_veto_temp", override_fields), ("quick_veto_duration", duration_fields)):
+            metric = next(m for m in METRICS if m.key == key)
+            value = extract(metric, fields)
+            self.values[key] = {"value": value, "error": None, "updated_at": stamp}
+        if (abs(self.values["quick_veto_temp"]["value"] - temperature) > 0.05 or
+                abs(self.values["quick_veto_duration"]["value"] - duration) > 0.05):
+            raise ValueError("controller_readback_mismatch")
+        if self.publisher:
+            self.publisher.publish(self.values)
+        return {"setpoint": self.values["room_setpoint"]["value"],
+                "temperature": self.values["quick_veto_temp"]["value"],
+                "duration": self.values["quick_veto_duration"]["value"],
+                "replies": replies}
+
     async def run(self):
         while True:
             started = time.monotonic()
@@ -209,6 +230,26 @@ async def index():
 @app.get("/api/state")
 async def state():
     return app.state.monitor.snapshot()
+
+
+@app.post("/api/controller/override")
+async def controller_override(request: Request):
+    try:
+        payload = await request.json()
+    except (ValueError, UnicodeDecodeError):
+        raise HTTPException(400, "Invalid JSON")
+    if not isinstance(payload, dict) or set(payload) != {"temperature", "duration"}:
+        raise HTTPException(400, "Provide temperature and duration")
+    temperature, duration = payload["temperature"], payload["duration"]
+    if isinstance(temperature, bool) or not isinstance(temperature, (int, float)) or not 5 <= temperature <= 30 or round(temperature * 2) != temperature * 2:
+        raise HTTPException(422, "Temperature must be 5–30 °C in 0.5 °C steps")
+    if isinstance(duration, bool) or not isinstance(duration, (int, float)) or not 0.5 <= duration <= 12 or round(duration * 2) != duration * 2:
+        raise HTTPException(422, "Duration must be 0.5–12 hours in 0.5 hour steps")
+    try:
+        return await app.state.monitor.set_room_override(temperature, duration)
+    except (OSError, TimeoutError, ValueError, asyncio.IncompleteReadError, asyncio.LimitOverrunError) as exc:
+        LOG.warning("CTLV2 Quick Veto write failed: %s", type(exc).__name__)
+        raise HTTPException(502, "Write failed or could not be verified; check the controller before retrying")
 
 
 @app.get("/style.css")

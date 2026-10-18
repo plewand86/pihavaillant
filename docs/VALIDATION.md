@@ -1,4 +1,4 @@
-# Weryfikacja wydania 0.5.0 — 2026-10-11
+# Weryfikacja wydania 0.6.0 — 2026-10-18
 
 ## Wykonane lokalnie
 
@@ -60,3 +60,12 @@ Po instalacji sprawdź:
 
 Wersja jest gotowa do instalacji próbnej, ale powyższe testy lokalne nie stanowią
 potwierdzenia działania na konkretnej instalacji HA.
+
+
+## Zakres 0.6.0
+
+Sterownik CTLV2 dodaje ograniczony formularz Quick Veto dla strefy 1. Zapis przyjmuje
+wyłącznie dwa parametry z zakresami i krokiem wartości sprawdzanymi po stronie serwera.
+Po zapisach wykonywany jest odczyt aktywnej nastawy, temperatury override i czasu.
+Do Home Assistant ani ebusd nie wysyła się dowolnych nazw poleceń z formularza.
+Nie wykonano testu na fizycznym kotle; działanie zapisu należy potwierdzić w sterowniku.

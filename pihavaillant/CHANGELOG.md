@@ -1,3 +1,10 @@
+# 0.6.0
+
+- Panel CTLV2 pokazuje pomiar pokoju, aktywną nastawę i nastawę Quick Veto.
+- Formularz pozwala ustawić temperaturę Quick Veto oraz czas od 30 minut do 12 godzin.
+- Zapis ograniczony do `Z1QuickVetoTemp` i `Z1QuickVetoDuration`, z odczytem zwrotnym sterownika.
+- Interfejs informuje, że zmiana może uruchomić ogrzewanie i pokazuje wynik albo błąd weryfikacji.
+
 # 0.5.1
 
 - Poprawiona ikona w bocznym menu Home Assistant: `mdi:water-boiler`.

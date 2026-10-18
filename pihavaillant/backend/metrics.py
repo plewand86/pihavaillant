@@ -22,6 +22,9 @@ class Metric:
 
 
 METRICS = [
+    Metric("room_setpoint", "Nastawa temperatury pokojowej", "Z1ActualRoomTempDesired", unit="°C", low=5, high=30, device_class="temperature", circuit="ctlv2"),
+    Metric("quick_veto_temp", "Temperatura Quick Veto", "Z1QuickVetoTemp", unit="°C", low=5, high=30, device_class="temperature", circuit="ctlv2"),
+    Metric("quick_veto_duration", "Czas Quick Veto", "Z1QuickVetoDuration", unit="h", low=0.5, high=12, circuit="ctlv2"),
     Metric("valve_position", "Pozycja zaworu CO/CWU", "PositionValveSet", high=100, diagnostic=True),
     Metric("burner_mode", "Przeznaczenie pracy palnika", "", kind="text", state_class=None),
     Metric("room_temp", "Temperatura pokojowa (strefa 1)", "Z1RoomTemp", unit="°C", low=-30, high=60, device_class="temperature", circuit="ctlv2"),

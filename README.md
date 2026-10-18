@@ -1,18 +1,18 @@
 # PiHA Vaillant
 
-**Wersja 0.5.0:** nowy przejrzysty panel z osobnymi kartami kotła, podłogówki i CWU oraz wyróżnieniem aktywnego obiegu.
+**Wersja 0.6.0:** sterownik pokojowy CTLV2 w panelu z możliwością czasowej zmiany nastawy Quick Veto.
 W HA odśwież repozytoria w sklepie dodatków, otwórz PiHA Vaillant i wybierz
 **Aktualizuj**. Zachowano slug i identyfikatory encji; nie trzeba dodawać
 integracji ponownie. Nowa historia zaczyna być zbierana po aktualizacji.
 
 Dodatek Home Assistant do wizualizacji Vaillant ecoTEC plus przez działający **ebusd**.
-Odczytuje dane z portu TCP ebusd i tworzy 32 encje MQTT Discovery. Zawiera polski
+Odczytuje dane z portu TCP ebusd i tworzy encje MQTT Discovery. Zawiera polski
 panel Ingress ze schematem kotła, pomp i zasobnika, trwałą historię palnika,
 wykres temperatur, diagnostykę oraz dashboard Lovelace bez dodatkowych kart HACS.
 
-**Wyłącznie odczyt:** nie ma usług sterowania, tematów MQTT command, zmiany nastaw,
-resetowania błędów ani poleceń write/hex. Aktywne zapytania `read` wysyłają żądania
-odczytu na magistralę; nie jest to wyłącznie pasywny podsłuch.
+Panel pozwala zmienić tylko temperaturę Quick Veto strefy 1 i czas jej obowiązywania.
+Nie udostępnia dowolnych poleceń eBUS ani sterowania przez MQTT. Aktywne zapytania
+`read` oraz ograniczone zapisy Quick Veto wysyłają żądania na magistralę eBUS.
 
 ## Architektura i pochodzenie
 
@@ -209,7 +209,7 @@ może nadać inną nazwę przy konflikcie). Panel pokazuje kafelek i osobny wykr
 pokojowy z tym samym zakresem czasu co palnik. Archiwum 90 dni zaczyna się
 od pierwszego odczytu po aktualizacji; istniejąca historia kotła pozostaje.
 Brak odpowiedzi, błędne dekodowanie, niedostępny czujnik lub wartość poza
-zakresem -30…60°C daje niedostępność, nigdy zastępcze 0°C. Odczyt jest read-only.
+zakresem -30…60°C daje niedostępność, nigdy zastępcze 0°C.
 
 W razie braku pomiaru sprawdź `ebusctl read -V -f -c ctlv2 Z1RoomTemp`.
 Oczekiwane pole w konfiguracji CTLV2 to `value`, np. `value=24.1 °C`.
@@ -234,3 +234,15 @@ Stare dane pozostają w bazie jako tryb nieustalony; nie są klasyfikowane wstec
 W HA pojawia się sensor `sensor.pihavaillant_boiler_burner_mode`
 (`heating`, `dhw`, `unknown`, `off`) i diagnostyka `valve_position`.
 Aktualizacja dodatku zachowuje konfigurację i archiwum.
+
+
+## Sterownik pokojowy w panelu (0.6.0)
+
+Panel pokazuje temperaturę zmierzoną, aktywną nastawę i Quick Veto dla CTLV2 strefy 1.
+Formularz pozwala ustawić `Z1QuickVetoTemp` (5–30°C co 0,5°C) oraz
+`Z1QuickVetoDuration` (0,5–12 godzin co 0,5 h). Wysłanie czasu włącza Quick Veto;
+po upływie sterownik wraca do zwykłego programu. Panel wykonuje odczyt zwrotny
+`Z1ActualRoomTempDesired`, temperatury override i czasu. Jeśli weryfikacja nie powiedzie
+się, pokaże błąd i zaleci sprawdzić sterownik przed ponowieniem. Zmiana może uruchomić
+ogrzewanie. Nie wpisuj `Z1ActualRoomTempDesired` ani innych wiadomości; tylko dwa
+parametry Quick Veto są udostępnione do zapisu.

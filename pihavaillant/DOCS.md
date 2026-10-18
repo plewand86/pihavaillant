@@ -32,7 +32,7 @@ może nadać inną nazwę przy konflikcie). Panel pokazuje kafelek i osobny wykr
 pokojowy z tym samym zakresem czasu co palnik. Archiwum 90 dni zaczyna się
 od pierwszego odczytu po aktualizacji; istniejąca historia kotła pozostaje.
 Brak odpowiedzi, błędne dekodowanie, niedostępny czujnik lub wartość poza
-zakresem -30…60°C daje niedostępność, nigdy zastępcze 0°C. Odczyt jest read-only.
+zakresem -30…60°C daje niedostępność, nigdy zastępcze 0°C.
 
 W razie braku pomiaru sprawdź `ebusctl read -V -f -c ctlv2 Z1RoomTemp`.
 Oczekiwane pole w konfiguracji CTLV2 to `value`, np. `value=24.1 °C`.
@@ -57,3 +57,15 @@ Stare dane pozostają w bazie jako tryb nieustalony; nie są klasyfikowane wstec
 W HA pojawia się sensor `sensor.pihavaillant_boiler_burner_mode`
 (`heating`, `dhw`, `unknown`, `off`) i diagnostyka `valve_position`.
 Aktualizacja dodatku zachowuje konfigurację i archiwum.
+
+
+## Sterowanie Quick Veto (0.6.0)
+
+W panelu CTLV2 można ustawić tymczasową temperaturę strefy 1 i czas 0,5–12 h.
+Wartość temperatury: 5–30°C w krokach 0,5°C. Zapis obejmuje wyłącznie
+`Z1QuickVetoTemp` i `Z1QuickVetoDuration`; drugi parametr włącza Quick Veto.
+Odczyt zwrotny obejmuje aktywną nastawę, temperaturę Quick Veto i czas. Zmiana może
+uruchomić ogrzewanie. Po błędzie zapisu lub weryfikacji sprawdź sterownik przed
+ponowieniem, ponieważ odpowiedź może nie potwierdzić, czy sterownik przyjął polecenie.
+
+Wysyłanie dowolnych komend eBUS jest niedostępne. Funkcje MQTT pozostają tylko do odczytu.

@@ -28,6 +28,9 @@ views:
           - sensor.pihavaillant_boiler_delta_temp
           - sensor.pihavaillant_boiler_storage_temp
           - sensor.pihavaillant_boiler_room_temp
+          - sensor.pihavaillant_boiler_room_setpoint
+          - sensor.pihavaillant_boiler_quick_veto_temp
+          - sensor.pihavaillant_boiler_quick_veto_duration
           - sensor.pihavaillant_boiler_outdoor_temp
           - sensor.pihavaillant_boiler_pressure
           - sensor.pihavaillant_boiler_fan_speed
@@ -44,6 +47,9 @@ views:
         hours_to_show: 24
         entities:
           - sensor.pihavaillant_boiler_room_temp
+          - sensor.pihavaillant_boiler_room_setpoint
+          - sensor.pihavaillant_boiler_quick_veto_temp
+          - sensor.pihavaillant_boiler_quick_veto_duration
       - type: history-graph
         title: Cykle palnika
         hours_to_show: 6
