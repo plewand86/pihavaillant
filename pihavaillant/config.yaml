@@ -1,5 +1,5 @@
 name: PiHA Vaillant
-version: "0.6.0"
+version: "0.6.1"
 slug: pihavaillant
 description: "Monitor i sterowanie nastawą pokojową Vaillant ecoTEC plus przez ebusd"
 url: https://github.com/plewand86/pihavaillant

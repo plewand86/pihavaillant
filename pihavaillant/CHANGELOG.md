@@ -1,3 +1,9 @@
+# 0.6.1
+
+- Przeprojektowany panel CTLV2: wyraźne kolory dla temperatury zmierzonej, celu sterownika i Quick Veto.
+- Formularz zmiany nastawy ma oddzieloną powierzchnię, czytelniejsze pola i widoczne potwierdzenie ryzyka uruchomienia grzania.
+- Poprawione opisy i układ panelu na telefonach.
+
 # 0.6.0
 
 - Panel CTLV2 pokazuje pomiar pokoju, aktywną nastawę i nastawę Quick Veto.

@@ -1,6 +1,6 @@
 # PiHA Vaillant
 
-**Wersja 0.6.0:** sterownik pokojowy CTLV2 w panelu z możliwością czasowej zmiany nastawy Quick Veto.
+**Wersja 0.6.1:** przeprojektowany panel sterownika pokojowego CTLV2 z czytelniejszym podziałem odczytów i nastaw.
 W HA odśwież repozytoria w sklepie dodatków, otwórz PiHA Vaillant i wybierz
 **Aktualizuj**. Zachowano slug i identyfikatory encji; nie trzeba dodawać
 integracji ponownie. Nowa historia zaczyna być zbierana po aktualizacji.
